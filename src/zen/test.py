@@ -40,24 +40,24 @@ from tests.flow import *
 
 # matching algorithms
 from tests.max_matching import *
- 
+
 # graph generation
 from tests.randomize import *
- 
+
 # spanning algorithms
 from tests.spanning import *
 
 # control stuff
 from tests.profiles import *
 from tests.reachability import *
- 
+
 # utilities
 from tests.fiboheap import *
- 
+
 # modularity
 from tests.modularity import *
 
-#layout
+# layout
 from tests.layout import *
 
 # drawing
@@ -72,4 +72,4 @@ from tests.communityset import *
 from tests.lpa import *
 
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()

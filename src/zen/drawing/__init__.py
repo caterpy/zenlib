@@ -13,9 +13,9 @@ Rendering to Ubigraph
 """
 
 try:
-	import pylab
-	import mpl
+    import pylab
+    import mpl
 except:
-	print 'zen.drawing.mpl not auto-imported due to missing or broken matplotlib library'
-	
+    print 'zen.drawing.mpl not auto-imported due to missing or broken matplotlib library'
+
 from ubigraph import UbigraphRenderer

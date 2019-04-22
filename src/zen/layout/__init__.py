@@ -36,89 +36,93 @@ import forceatlas_layout
 import fruchtermanreingold_layout
 
 BBOX_NAME = 'bbox'
-BBOX_DEFAULT_VALUE = (0.,0.,100.,100.)
+BBOX_DEFAULT_VALUE = (0., 0., 100., 100.)
 
-def spring(GV,**kwargs):
-	"""
-	Use a `spring-embedder <http://en.wikipedia.org/wiki/Force-based_algorithms_(graph_drawing)>`_ algorithm for
-	deriving positions for the nodes.  Edges follow a straight path between their endpoints.
-	
-	**Args**:
-		
-		* ``GV``: the graph or view (containing a graph) whose layout will be built.
-	
-	**KwArgs**:
-	
-		* ``num_iterations [=100]`` (int): the number of times to update the positions of nodes based on the forces among them.
-		* ``bbox [=(0,0,100,100)]`` (:py:class:`tuple`): the spatial box into which all nodes should be confined.
-	
-	**Returns**:
-		:py:class:`zen.View`. A view object with the position array set to the positions determined by this layout.
-	"""
-	if BBOX_NAME not in kwargs:
-		kwargs[BBOX_NAME] = BBOX_DEFAULT_VALUE
-		
-	return spring_layout.layout(GV,**kwargs)
-	
-def random(GV,**kwargs):
-	"""
-	Assign random positions to all nodes in the graph.  Edges follow a straight path between their endpoints.
-	
-	**Args**:
-		
-		* ``GV``: the graph or view (containing a graph) whose layout will be built.
-		
-	**KwArgs**:
-	
-		* ``bbox [=(0,0,100,100)]`` (:py:class:`tuple`): the spatial box into which all nodes should be confined.
-	
-	**Returns**:
-		:py:class:`zen.View`. A view object with the position array set to the positions determined by this layout.
-	"""
-	if BBOX_NAME not in kwargs:
-		kwargs[BBOX_NAME] = BBOX_DEFAULT_VALUE
-		
-	return random_layout.layout(GV,**kwargs)
-	
-def forceatlas(GV,**kwargs):
-	"""
-	Use a `force-based <http://en.wikipedia.org/wiki/Force-based_algorithms_(graph_drawing)>`_ algorithm for
-	deriving positions for the nodes.  Edges follow a straight path between their endpoints.
-	
-	**Args**:
-		
-		* ``GV``: the graph or view (containing a graph) whose layout will be built.
-		
-	**KwArgs**:
-	
-		* ``bbox [=(0,0,100,100)]`` (:py:class:`tuple`): the spatial box into which all nodes should be confined.
-	
-	**Returns**:
-		:py:class:`zen.View`. A view object with the position array set to the positions determined by this layout.
-	"""
-	if BBOX_NAME not in kwargs:
-		kwargs[BBOX_NAME] = BBOX_DEFAULT_VALUE
 
-	return forceatlas_layout.layout(GV,**kwargs)
-	
-def fruchterman_reingold(GV,**kwargs):
-	"""
-	Use the `Fruchterman-Reingold <http://en.wikipedia.org/wiki/Force-based_algorithms_(graph_drawing)>`_ algorithm for
-	deriving positions for the nodes.  Edges follow a straight path between their endpoints.
-	
-	**Args**:
-		
-		* ``GV``: the graph or view (containing a graph) whose layout will be built.
-		
-	**KwArgs**:
-	
-		* ``num_iterations [=100]`` (int): the number of times to update the positions of nodes based on the forces among them.
-		* ``bbox [=(0,0,100,100)]`` (:py:class:`tuple`): the spatial box into which all nodes should be confined.
-	
-	**Returns**:
-		:py:class:`zen.View`. A view object with the position array set to the positions determined by this layout.
-	"""
-	if BBOX_NAME not in kwargs:
-		kwargs[BBOX_NAME] = BBOX_DEFAULT_VALUE
+def spring(GV, **kwargs):
+    """
+    Use a `spring-embedder <http://en.wikipedia.org/wiki/Force-based_algorithms_(graph_drawing)>`_ algorithm for
+    deriving positions for the nodes.  Edges follow a straight path between their endpoints.
 
-	return fruchtermanreingold_layout.layout(GV,**kwargs)
+    **Args**:
+
+            * ``GV``: the graph or view (containing a graph) whose layout will be built.
+
+    **KwArgs**:
+
+            * ``num_iterations [=100]`` (int): the number of times to update the positions of nodes based on the forces among them.
+            * ``bbox [=(0,0,100,100)]`` (:py:class:`tuple`): the spatial box into which all nodes should be confined.
+
+    **Returns**:
+            :py:class:`zen.View`. A view object with the position array set to the positions determined by this layout.
+    """
+    if BBOX_NAME not in kwargs:
+        kwargs[BBOX_NAME] = BBOX_DEFAULT_VALUE
+
+    return spring_layout.layout(GV, **kwargs)
+
+
+def random(GV, **kwargs):
+    """
+    Assign random positions to all nodes in the graph.  Edges follow a straight path between their endpoints.
+
+    **Args**:
+
+            * ``GV``: the graph or view (containing a graph) whose layout will be built.
+
+    **KwArgs**:
+
+            * ``bbox [=(0,0,100,100)]`` (:py:class:`tuple`): the spatial box into which all nodes should be confined.
+
+    **Returns**:
+            :py:class:`zen.View`. A view object with the position array set to the positions determined by this layout.
+    """
+    if BBOX_NAME not in kwargs:
+        kwargs[BBOX_NAME] = BBOX_DEFAULT_VALUE
+
+    return random_layout.layout(GV, **kwargs)
+
+
+def forceatlas(GV, **kwargs):
+    """
+    Use a `force-based <http://en.wikipedia.org/wiki/Force-based_algorithms_(graph_drawing)>`_ algorithm for
+    deriving positions for the nodes.  Edges follow a straight path between their endpoints.
+
+    **Args**:
+
+            * ``GV``: the graph or view (containing a graph) whose layout will be built.
+
+    **KwArgs**:
+
+            * ``bbox [=(0,0,100,100)]`` (:py:class:`tuple`): the spatial box into which all nodes should be confined.
+
+    **Returns**:
+            :py:class:`zen.View`. A view object with the position array set to the positions determined by this layout.
+    """
+    if BBOX_NAME not in kwargs:
+        kwargs[BBOX_NAME] = BBOX_DEFAULT_VALUE
+
+    return forceatlas_layout.layout(GV, **kwargs)
+
+
+def fruchterman_reingold(GV, **kwargs):
+    """
+    Use the `Fruchterman-Reingold <http://en.wikipedia.org/wiki/Force-based_algorithms_(graph_drawing)>`_ algorithm for
+    deriving positions for the nodes.  Edges follow a straight path between their endpoints.
+
+    **Args**:
+
+            * ``GV``: the graph or view (containing a graph) whose layout will be built.
+
+    **KwArgs**:
+
+            * ``num_iterations [=100]`` (int): the number of times to update the positions of nodes based on the forces among them.
+            * ``bbox [=(0,0,100,100)]`` (:py:class:`tuple`): the spatial box into which all nodes should be confined.
+
+    **Returns**:
+            :py:class:`zen.View`. A view object with the position array set to the positions determined by this layout.
+    """
+    if BBOX_NAME not in kwargs:
+        kwargs[BBOX_NAME] = BBOX_DEFAULT_VALUE
+
+    return fruchtermanreingold_layout.layout(GV, **kwargs)

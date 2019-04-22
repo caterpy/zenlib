@@ -14,37 +14,41 @@ import os.path
 import zen.io.scn as scn
 import zen.io.gml as gml
 
-__all__ = ['les_miserable','karate_club','florentine','axis_allies']
+__all__ = ['les_miserable', 'karate_club', 'florentine', 'axis_allies']
+
 
 def les_miserable():
-	"""
-	Loads and returns an undirected network of the coappearances among the characters in the novel :title:`Les Miserable`.
-	
-	.. note::
-		Source: D. E. Knuth, :title:`The Stanford GraphBase: A Platform for Combinatorial Computing`, Addison-Wesley, Reading, MA (1993).
-	"""
-	fname = os.path.join(os.path.dirname(__file__),'lesmis.gml')
-	return gml.read(fname,weight_fxn=lambda x: x['value'])
-	
+    """
+    Loads and returns an undirected network of the coappearances among the characters in the novel :title:`Les Miserable`.
+
+    .. note::
+            Source: D. E. Knuth, :title:`The Stanford GraphBase: A Platform for Combinatorial Computing`, Addison-Wesley, Reading, MA (1993).
+    """
+    fname = os.path.join(os.path.dirname(__file__), 'lesmis.gml')
+    return gml.read(fname, weight_fxn=lambda x: x['value'])
+
+
 def karate_club():
-	"""
-	Loads and returns an undirected social network of friendships among 34 members of a karate club in the 1970s.
-	
-	.. note::
-		Source: W. W. Zachary, *An information flow model for conflict and fission in small groups*, Journal of Anthropological Research 33, 452-473 (1977).
-	"""
-	fname = os.path.join(os.path.dirname(__file__),'karate.scn')
-	return scn.read(fname,directed=False)
-	
+    """
+    Loads and returns an undirected social network of friendships among 34 members of a karate club in the 1970s.
+
+    .. note::
+            Source: W. W. Zachary, *An information flow model for conflict and fission in small groups*, Journal of Anthropological Research 33, 452-473 (1977).
+    """
+    fname = os.path.join(os.path.dirname(__file__), 'karate.scn')
+    return scn.read(fname, directed=False)
+
+
 def florentine():
-	"""
-	Loads and returns the undirected Florentine marriage network.
-	
-	.. note::
-		Source: Padgett, John F. 1994. *Marriage and Elite Structure in Renaissance Florence*, 1282-1500. Paper delivered to the Social Science History Association.
-	"""
-	fname = os.path.join(os.path.dirname(__file__),'florentine.scn')
-	return scn.read(fname,directed=False)
-	
+    """
+    Loads and returns the undirected Florentine marriage network.
+
+    .. note::
+            Source: Padgett, John F. 1994. *Marriage and Elite Structure in Renaissance Florence*, 1282-1500. Paper delivered to the Social Science History Association.
+    """
+    fname = os.path.join(os.path.dirname(__file__), 'florentine.scn')
+    return scn.read(fname, directed=False)
+
+
 def axis_allies():
-	pass
+    pass

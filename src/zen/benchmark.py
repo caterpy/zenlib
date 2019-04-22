@@ -7,4 +7,4 @@ from benchmarks.edgelist import *
 #from benchmarks.centrality import *
 
 if __name__ == '__main__':
-	main()
+    main()
