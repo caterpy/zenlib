@@ -677,6 +677,8 @@ cdef dijkstra_d_(DiGraph G, int start_idx, int end_idx, bint gen_predecessors, b
 		return distance
 
 def dijkstra_cmp(x,y):
+	def cmp(a, b):
+		return (a > b) - (a < b)
 	return cmp(x.cost,y.cost)
 	
 cdef dijkstra_u_(Graph G, int start_idx, int end_idx, bint gen_predecessors, bint ignore_weights):
