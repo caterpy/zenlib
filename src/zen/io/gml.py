@@ -517,7 +517,7 @@ def resolve_write_mode(kwargs):
 
         # validation:
         if(not isinstance(write_node_data, bool) or not
-                isintstance(write_edge_data, bool)):
+                isinstance(write_edge_data, bool)):
             raise zenException('write_data keyword argument takes bool or'
                                ' 2-tuple of bools. Found: %s (%s)' % (
                                    write_data, type(write_data)))
@@ -535,7 +535,7 @@ def resolve_write_mode(kwargs):
 
         # validation:
         if(not isinstance(write_node_data, bool) or
-                not isintstance(write_edge_data, bool)):
+                not isinstance(write_edge_data, bool)):
             raise zenException('write_data keyword argument takes bool or'
                                ' 2-tuple of bools. Found: %s (%s)' % (
                                    write_data, type(write_data)))
