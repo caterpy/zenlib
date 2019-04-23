@@ -39,11 +39,11 @@ class UndirectedSCNTestCase(unittest.TestCase):
         self.assertEqual(G.node_data_(3)[0], '4')
         self.assertEqual(G.node_data_(4)[0], '5')
 
-        self.assertEquals(G.edge_data_(0)[0], '10')
-        self.assertEquals(G.edge_data_(1)[0], '11')
-        self.assertEquals(G.edge_data_(2)[0], '12')
-        self.assertEquals(G.edge_data_(3)[0], '13')
-        self.assertEquals(G.edge_data_(4)[0], '14')
+        self.assertEqual(G.edge_data_(0)[0], '10')
+        self.assertEqual(G.edge_data_(1)[0], '11')
+        self.assertEqual(G.edge_data_(2)[0], '12')
+        self.assertEqual(G.edge_data_(3)[0], '13')
+        self.assertEqual(G.edge_data_(4)[0], '14')
 
     def test_write1(self):
         fname = '___testwrite1__99001324.scn'
@@ -121,11 +121,11 @@ class SCNTestCase(unittest.TestCase):
         self.assertEqual(G.node_data_(3)[0], '4')
         self.assertEqual(G.node_data_(4)[0], '5')
 
-        self.assertEquals(G.edge_data_(0)[0], '10')
-        self.assertEquals(G.edge_data_(1)[0], '11')
-        self.assertEquals(G.edge_data_(2)[0], '12')
-        self.assertEquals(G.edge_data_(3)[0], '13')
-        self.assertEquals(G.edge_data_(4)[0], '14')
+        self.assertEqual(G.edge_data_(0)[0], '10')
+        self.assertEqual(G.edge_data_(1)[0], '11')
+        self.assertEqual(G.edge_data_(2)[0], '12')
+        self.assertEqual(G.edge_data_(3)[0], '13')
+        self.assertEqual(G.edge_data_(4)[0], '14')
 
     def test_write1(self):
         fname = '___testwrite1__99001324.scn'

@@ -43,28 +43,28 @@ from degree import *
 from randomize import *
 
 # import generation routines
-import generating
+from . import generating
 
 # import built-in data
-import data
+from . import data
 
 # import utilities
-from exceptions import *
-from constants import *
+from .exceptions import *
+from .constants import *
 
 # import io routines
-from io import *
+from .io import *
 
 # import algorithms
-from algorithms import *
+from .algorithms import *
 
 # import control functionality
-import control
+from . import control
 
 # import visual stuff
-import layout
-from drawing import *
-from view import *
+from . import layout
+from .drawing import *
+from .view import *
 
 # import interoperability
-from nx import *
+from .nx import *

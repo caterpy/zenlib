@@ -24,9 +24,9 @@ from zen.exceptions import *
 from zen.graph import Graph
 from zen.digraph import DiGraph
 from zen.bipartite import BipartiteGraph
-from gml_codec import BasicGMLCodec, ZenGMLCodec
-from gml_interpreter import GMLInterpreter
-from gml_tokenizer import GMLTokenizer
+from .gml_codec import BasicGMLCodec, ZenGMLCodec
+from .gml_interpreter import GMLInterpreter
+from .gml_tokenizer import GMLTokenizer
 from collections import Iterable, Hashable
 import os
 import cgi
@@ -127,7 +127,7 @@ def write(G, filename, **kwargs):
                 fh.write(format_zen_data('zenData', ndata, 2, enc))
 
             else:  # expects zenData to be dict
-                for key, val in ndata.items():
+                for key, val in list(ndata.items()):
                     fh.write(format_zen_data(key, val, 2, enc))
 
         fh.write('\t]\n')
@@ -146,7 +146,7 @@ def write(G, filename, **kwargs):
                 fh.write(format_zen_data('zenData', edata, 2, enc))
 
             else:  # expects zenData to be dict
-                for key, val in edata.items():
+                for key, val in list(edata.items()):
                     fh.write(format_zen_data(key, val, 2, enc))
 
         fh.write('\t]\n')
@@ -187,14 +187,14 @@ def format_zen_data(keyname, data, tab_depth, encoder, strict=True):
         # Validate encoder output
         if strict:
             try:
-                assert(isinstance(encoded_data, basestring))
+                assert(isinstance(encoded_data, str))
                 assert(encoded_data.startswith(DIGITS_AND_QUOTES))
                 encoded_data.encode('ascii')
                 if encoded_data.startswith(DIGITS):
                     num = float(encoded_data)
                     assert(num < 2147483647 or num > -2147483648)
 
-            except AssertionError, UnicodeEncodeError:
+            except AssertionError as UnicodeEncodeError:
                 raise ZenException('GML Encoder has violated gml specifications. '
                                    'see <http://www.fim.uni-passau.de/fileadmin/files/lehrstuhl/brandenburg/projekte/gml/gml-technical-report.pdf>. \n Use '
                                    'gml.write(..., strict=False) to force writing.')
@@ -205,7 +205,7 @@ def format_zen_data(keyname, data, tab_depth, encoder, strict=True):
     # Recursive call for dicts
     elif isinstance(data, dict):
         formatted_data += tabs + keyname + ' [\n'
-        for key, val in data.items():
+        for key, val in list(data.items()):
             formatted_data += format_zen_data(key, val, tab_depth + 1, encoder)
         formatted_data += tabs + ']\n'
 
@@ -275,8 +275,8 @@ def read(fname, **kwargs):
 
         if(isinstance(gml_tree, list)):
             graph_tree = gml_tree[0]
-            print 'Warning: multiple graphs stored in this file.  Use '\
-                'gml.read_all(fname, [...]) to get list of all graphs'
+            print ("Warning: multiple graphs stored in this file.  Use"
+                "gml.read_all(fname, [...]) to get list of all graphs")
 
         return build_graph(graph_tree, weight_fxn)
 
@@ -300,8 +300,8 @@ def read_all(fname, **kwargs):
             graph_tree = [gml_tree['graph']]
 
             graph_tree = gml_tree[0]
-            print 'Warning: multiple graphs stored in this file.  Use '\
-                'gml.read_all(fname, [...]) to get list of all graphs'
+            print ("Warning: multiple graphs stored in this file.  Use "
+                "gml.read_all(fname, [...]) to get list of all graphs")
 
         return build_graph(graph_tree, weight_fxn)
 
@@ -362,7 +362,7 @@ def build_graph(graph_tree, weight_fxn):
             node_obj = None
             zen_data = None
 
-            for key, val in node.items():
+            for key, val in list(node.items()):
 
                 if key == 'name':
                     node_obj = val
@@ -389,7 +389,7 @@ def build_graph(graph_tree, weight_fxn):
                 node_data = None
 
             # make sure that the node object is hashable otherwise put it
-            if not isinstance(node_obj, basestring) and node_obj is not None:
+            if not isinstance(node_obj, str) and node_obj is not None:
 
                 if not isinstance(node_obj, Hashable):\
 
@@ -447,7 +447,7 @@ def build_graph(graph_tree, weight_fxn):
             zen_data = None
             edge_data = {}
 
-            for key, val in edge.items():
+            for key, val in list(edge.items()):
 
                 if key == 'id':
                     edge_idx = val
@@ -549,7 +549,7 @@ def resolve_codec(kwargs):
     if 'gml_codec' in kwargs:
         enc = kwargs['encoder']
         try:
-            assert(isinstance(enc.encode(''), basestring))
+            assert(isinstance(enc.encode(''), str))
             enc.__name__.encode('ascii')
         except (AttributeError, AssertionError) as e:
             raise ZenException('encoder must define encode() to take type '
@@ -576,7 +576,7 @@ def resolve_codec(kwargs):
     if 'string_encoder' in kwargs:
         str_enc = kwargs['string_encoder']
         try:
-            assert(isinstance(str_enc(''), basestring))
+            assert(isinstance(str_enc(''), str))
         except (TypeError, AssertionError) as e:
             raise ZenException('string_encoder must be a function that takes '
                                'basestring and returns basestring.')
@@ -588,7 +588,7 @@ def resolve_codec(kwargs):
     if 'string_decoder' in kwargs:
         str_dec = kwargs['string_decoder']
         try:
-            assert(isinstance(str_dec(''), basestring))
+            assert(isinstance(str_dec(''), str))
         except (TypeError, AssertionError) as e:
             raise ZenException('string_decoder must be a function that takes '
                                'basestring and returns basestring.')

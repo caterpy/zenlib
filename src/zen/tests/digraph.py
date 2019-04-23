@@ -22,8 +22,8 @@ class DiGraphBuildFromTestCase(unittest.TestCase):
         A = np.ones((10, 10))
         G = DiGraph.from_adj_matrix(A)
 
-        self.assertEquals(len(G), 10)
-        self.assertEquals(G.size(), 100)
+        self.assertEqual(len(G), 10)
+        self.assertEqual(G.size(), 100)
 
         # done
 
@@ -33,8 +33,8 @@ class DiGraphBuildFromTestCase(unittest.TestCase):
         A = np.ones((10, 10))
         G = DiGraph.from_adj_matrix(A, node_obj_fxn=None)
 
-        self.assertEquals(len(G), 10)
-        self.assertEquals(G.size(), 100)
+        self.assertEqual(len(G), 10)
+        self.assertEqual(G.size(), 100)
 
         with self.assertRaises(ZenException):
             G.nodes()
@@ -85,7 +85,7 @@ class DiGraphCopyTestCase(unittest.TestCase):
         #import sys
 
         k = 2
-        for N in xrange(190, 200):
+        for N in range(190, 200):
             # print  'N = ', N
             for Gf, lbl in [(lambda: erdos_renyi(N, float(k)/N, directed=True), 'ER'),
                             (lambda: barabasi_albert(N, k, directed=True), 'BA'),
@@ -97,7 +97,7 @@ class DiGraphCopyTestCase(unittest.TestCase):
 
                 # print lbl
                 # sys.stdout.flush()
-                for i in xrange(10):
+                for i in range(10):
                     G = Gf()
                     while len(G) > 0:
                         G.rm_node_(G.nodes_()[np.random.randint(len(G))])
@@ -131,7 +131,7 @@ class DiGraphReverseTestCase(unittest.TestCase):
 
         G2 = G.reverse()
 
-        self.assertEquals(G.node_idx(1), G2.node_idx(1))
+        self.assertEqual(G.node_idx(1), G2.node_idx(1))
         self.assertEqual(G.node_idx(2), G2.node_idx(2))
         self.assertEqual(G.edge_idx(1, 2), G2.edge_idx(2, 1))
 
@@ -333,8 +333,8 @@ class DiGraphTestCase(unittest.TestCase):
 
         E = G.in_edges(2, weight=True)
         e1 = E[0]
-        self.assertEquals(len(e1), 3)
-        self.assertEquals(e1[2], 2)
+        self.assertEqual(len(e1), 3)
+        self.assertEqual(e1[2], 2)
 
     def test_out_edges_weights(self):
         G = DiGraph()
@@ -343,8 +343,8 @@ class DiGraphTestCase(unittest.TestCase):
 
         E = G.out_edges(1, weight=True)
         e1 = E[0]
-        self.assertEquals(len(e1), 3)
-        self.assertEquals(e1[2], 2)
+        self.assertEqual(len(e1), 3)
+        self.assertEqual(e1[2], 2)
 
     def test_add_node_x_error(self):
         G = DiGraph()
@@ -382,7 +382,7 @@ class DiGraphTestCase(unittest.TestCase):
         G = DiGraph()
         G.add_nodes(10)
 
-        self.assertEquals(len(G), 10)
+        self.assertEqual(len(G), 10)
 
         G.validate()
 
@@ -390,10 +390,10 @@ class DiGraphTestCase(unittest.TestCase):
         G = DiGraph()
         G.add_nodes(10, lambda x: str(x))
 
-        self.assertEquals(len(G), 10)
+        self.assertEqual(len(G), 10)
 
         for n_, n in G.nodes_iter_(obj=True):
-            self.assertEquals(str(n_), n)
+            self.assertEqual(str(n_), n)
 
         G.validate()
 
@@ -408,12 +408,12 @@ class DiGraphTestCase(unittest.TestCase):
 
         G.compact()
 
-        self.assertEquals(G.in_degree(4), 2)
-        self.assertEquals(G.out_degree(4), 1)
+        self.assertEqual(G.in_degree(4), 2)
+        self.assertEqual(G.out_degree(4), 1)
         self.assertTrue(G.has_edge(4, 4))
         self.assertTrue(G.has_edge(1, 4))
-        self.assertEquals(G.edge_idx(4, 4), 0)
-        self.assertEquals(G.edge_idx(1, 4), 1)
+        self.assertEqual(G.edge_idx(4, 4), 0)
+        self.assertEqual(G.edge_idx(1, 4), 1)
 
         G.validate()
 
@@ -423,9 +423,9 @@ class DiGraphTestCase(unittest.TestCase):
         G.add_edge(2, 3)
         G.rm_node(2)
 
-        self.assertEquals(G.max_node_idx, 2)
+        self.assertEqual(G.max_node_idx, 2)
         G.compact()
-        self.assertEquals(G.max_node_idx, 1)
+        self.assertEqual(G.max_node_idx, 1)
 
         G.validate()
 
@@ -435,9 +435,9 @@ class DiGraphTestCase(unittest.TestCase):
         G.add_edge(2, 3)
         G.rm_edge(1, 2)
 
-        self.assertEquals(G.max_edge_idx, 1)
+        self.assertEqual(G.max_edge_idx, 1)
         G.compact()
-        self.assertEquals(G.max_edge_idx, 0)
+        self.assertEqual(G.max_edge_idx, 0)
 
         G.validate()
 
@@ -478,15 +478,15 @@ class DiGraphTestCase(unittest.TestCase):
 
         M = G.matrix()
 
-        self.assertEquals(M[0, 0], 0)
-        self.assertEquals(M[0, 1], 1)
-        self.assertEquals(M[0, 2], 0)
-        self.assertEquals(M[1, 0], 0)
-        self.assertEquals(M[1, 1], 0)
-        self.assertEquals(M[1, 2], 1)
-        self.assertEquals(M[2, 0], 0)
-        self.assertEquals(M[2, 1], 0)
-        self.assertEquals(M[2, 2], 1)
+        self.assertEqual(M[0, 0], 0)
+        self.assertEqual(M[0, 1], 1)
+        self.assertEqual(M[0, 2], 0)
+        self.assertEqual(M[1, 0], 0)
+        self.assertEqual(M[1, 1], 0)
+        self.assertEqual(M[1, 2], 1)
+        self.assertEqual(M[2, 0], 0)
+        self.assertEqual(M[2, 1], 0)
+        self.assertEqual(M[2, 2], 1)
 
         G.validate()
 
@@ -610,8 +610,8 @@ class DiGraphTestCase(unittest.TestCase):
         G.add_edge('hello', 'there')
         G.add_edge('there', 'hello')
 
-        self.assertEqual(type(G.nodes()), types.ListType)
-        self.assertEqual(type(G.neighbors('hello')), types.ListType)
+        self.assertEqual(type(G.nodes()), list)
+        self.assertEqual(type(G.neighbors('hello')), list)
         self.assertEqual(len(G.neighbors('hello')), 1)
 
         G.validate()
@@ -645,7 +645,7 @@ class DiGraphTestCase(unittest.TestCase):
         try:
             G.add_edge('1', '2')
             success = True
-        except Exception, e:
+        except Exception as e:
             if not str(e).startswith('Duplicate edges'):
                 self.fail('Incorrect exception: %s' % str(e))
 
@@ -667,7 +667,7 @@ class DiGraphTestCase(unittest.TestCase):
         for i in range(10):
             G.add_node()
 
-        order = range(10)
+        order = list(range(10))
         order.remove(5)
         random.shuffle(order)
 
@@ -901,10 +901,10 @@ class DiGraphTestCase(unittest.TestCase):
         n1_all_raw = list(G.neighbors_iter_(n1))
         n1_all = set(n1_all_raw)
 
-        self.assertEquals(n1_in, set([n4, n2]))
-        self.assertEquals(n1_out, set([n2, n3]))
-        self.assertEquals(n1_all, set([n2, n3, n4]))
-        self.assertEquals(len(n1_all_raw), 3)
+        self.assertEqual(n1_in, set([n4, n2]))
+        self.assertEqual(n1_out, set([n2, n3]))
+        self.assertEqual(n1_all, set([n2, n3, n4]))
+        self.assertEqual(len(n1_all_raw), 3)
 
         G.validate()
 
@@ -923,7 +923,7 @@ class DiGraphTestCase(unittest.TestCase):
         for n in G.neighbors_iter_(n1):
             count += 1
 
-        self.assertEquals(count, 1100)
+        self.assertEqual(count, 1100)
 
         G.validate()
 
@@ -969,7 +969,7 @@ class DiGraphTestCase(unittest.TestCase):
         try:
             for nobj, data in G.neighbors_iter('1', data=True):
                 self.assertEqual(data, None)
-        except Exception, e:
+        except Exception as e:
             success = False
             self.assertTrue('does not have a node object' in str(e))
 
@@ -1020,7 +1020,7 @@ class DiGraphTestCase(unittest.TestCase):
         try:
             for x, y, data in G.edges(data=True):
                 pass
-        except Exception, e:
+        except Exception as e:
             if str(e).startswith('Edge'):
                 success = False
 
@@ -1045,10 +1045,10 @@ class DiGraphTestCase(unittest.TestCase):
         gen_E1_weight = G.edges(1, weight=True)
         gen_E1_data_weight = G.edges(1, data=True, weight=True)
 
-        self.assertEquals(sorted(E1), sorted(gen_E1))
-        self.assertEquals(sorted(E1_data), sorted(gen_E1_data))
-        self.assertEquals(sorted(E1_weight), sorted(gen_E1_weight))
-        self.assertEquals(sorted(E1_data_weight),
+        self.assertEqual(sorted(E1), sorted(gen_E1))
+        self.assertEqual(sorted(E1_data), sorted(gen_E1_data))
+        self.assertEqual(sorted(E1_weight), sorted(gen_E1_weight))
+        self.assertEqual(sorted(E1_data_weight),
                           sorted(gen_E1_data_weight))
 
         G.validate()
@@ -1127,7 +1127,7 @@ class DiGraphTestCase(unittest.TestCase):
         n2 = G.add_node()
         e1 = G.add_edge_(n1, n2, 'blah')
 
-        self.assertEquals((e1, 'blah'), G.edge_idx_(n1, n2, True))
+        self.assertEqual((e1, 'blah'), G.edge_idx_(n1, n2, True))
 
         G.validate()
 

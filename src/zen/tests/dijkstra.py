@@ -318,7 +318,7 @@ class DijkstraPathLengthTestCase(unittest.TestCase):
 
         d = dijkstra_path_length(G, 's', 's')
 
-        self.assertEquals(0, d)
+        self.assertEqual(0, d)
 
     def test_unreachable(self):
 
@@ -328,7 +328,7 @@ class DijkstraPathLengthTestCase(unittest.TestCase):
 
         d = dijkstra_path_length(G, 's', 'x')
 
-        self.assertEquals(float('infinity'), d)
+        self.assertEqual(float('infinity'), d)
 
     def test_sssp_directed(self):
 
@@ -376,7 +376,7 @@ class DijkstraPathLengthTestCase(unittest.TestCase):
 
         d = dijkstra_path_length(G, 's', 't')  # x should not be found
 
-        self.assertEquals(8, d)
+        self.assertEqual(8, d)
 
     def test_simple_directed_(self):
         G = Graph()
@@ -386,7 +386,7 @@ class DijkstraPathLengthTestCase(unittest.TestCase):
 
         D = dijkstra_path_length_(G, 0, 3)
 
-        self.assertEquals(D[3], 3)
+        self.assertEqual(D[3], 3)
 
         return
 
@@ -435,8 +435,8 @@ class DijkstraPathTestCase(unittest.TestCase):
 
         d, p = dijkstra_path(G, 's', 's')
 
-        self.assertEquals(0, d)
-        self.assertEquals([], p)
+        self.assertEqual(0, d)
+        self.assertEqual([], p)
 
     def test_unreachable(self):
 
@@ -446,8 +446,8 @@ class DijkstraPathTestCase(unittest.TestCase):
 
         d, p = dijkstra_path(G, 's', 'x')
 
-        self.assertEquals(float('infinity'), d)
-        self.assertEquals(None, p)
+        self.assertEqual(float('infinity'), d)
+        self.assertEqual(None, p)
 
     def test_sssp_directed(self):
 
@@ -495,9 +495,9 @@ class DijkstraPathTestCase(unittest.TestCase):
 
         d, p = dijkstra_path(G, 's', 't')  # x should not be found
 
-        self.assertEquals(8, d)
+        self.assertEqual(8, d)
 
-        self.assertEquals(['s', 'y', 't'], p)
+        self.assertEqual(['s', 'y', 't'], p)
 
     def test_simple_directed_(self):
         G = Graph()
@@ -507,9 +507,9 @@ class DijkstraPathTestCase(unittest.TestCase):
 
         R = dijkstra_path_(G, 0, 3)
 
-        self.assertEquals(len(R), 2)
+        self.assertEqual(len(R), 2)
         d, p = R
-        self.assertEquals(d[3], 3)
+        self.assertEqual(d[3], 3)
 
         return
 

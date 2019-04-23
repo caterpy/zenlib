@@ -1,5 +1,5 @@
 import random
-from sys import maxint
+from sys import maxsize
 
 from zen.graph import Graph
 from zen.digraph import DiGraph
@@ -35,12 +35,12 @@ def duplication_divergence_iky(n, s, **kwargs):
 
     if graph is not None:
         if len(graph) > 0:
-            raise ZenException, 'the graph must be empty, if provided'
+            raise ZenException('the graph must be empty, if provided')
         if graph.is_directed() != directed:
-            raise ZenException, 'graph and directed arguments must agree'
+            raise ZenException('graph and directed arguments must agree')
 
     if len(kwargs) > 0:
-        raise ZenException, 'Unknown arguments: %s' % ', '.join(kwargs.keys())
+        raise ZenException('Unknown arguments: %s' % ', '.join(list(kwargs.keys())))
 
     if seed is None:
         seed = -1
@@ -50,10 +50,10 @@ def duplication_divergence_iky(n, s, **kwargs):
         random.seed(seed)
 
     if type(n) != int:
-        raise ZenException, 'Parameter n must be an integer'
+        raise ZenException('Parameter n must be an integer')
     if type(s) != float and type(s) != int and type(s) != double:
-        print type(s)
-        raise ZenException, 'Parameter s must be a float, double, or an int'
+        print((str(type(s))))
+        raise ZenException('Parameter s must be a float, double, or an int')
 
     G = graph
     if graph is None:

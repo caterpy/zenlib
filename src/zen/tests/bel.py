@@ -16,7 +16,7 @@ class BELTestCase(unittest.TestCase):
             x = bel.write_str(G)
             self.fail(
                 'bel.write_str should have raised an exception. G is not compact.')
-        except ZenException, e:
+        except ZenException as e:
             pass
 
     def test_write_objless(self):
@@ -33,7 +33,7 @@ class BELTestCase(unittest.TestCase):
 
     def test_directed_rw1(self):
         G = DiGraph()
-        x = range(100)
+        x = list(range(100))
         for n in x:
             G.add_node(n)
 
@@ -56,14 +56,14 @@ class BELTestCase(unittest.TestCase):
         self.assertEqual(len(G), len(G2))
         self.assertEqual(G.size(), G2.size())
 
-        x = range(100)
+        x = list(range(100))
         for a in x:
             for b in x:
                 self.assertEqual(G.has_edge_(a, b), G2.has_edge_(a, b))
 
     def test_undirected_rw1(self):
         G = Graph()
-        x = range(100)
+        x = list(range(100))
         for n in x:
             G.add_node(n)
 
@@ -83,7 +83,7 @@ class BELTestCase(unittest.TestCase):
         self.assertEqual(len(G), len(G2))
         self.assertEqual(G.size(), G2.size())
 
-        x = range(100)
+        x = list(range(100))
         for a in x:
             for b in x:
                 self.assertEqual(G.has_edge_(a, b), G2.has_edge_(a, b))

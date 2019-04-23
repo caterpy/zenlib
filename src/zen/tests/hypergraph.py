@@ -73,7 +73,7 @@ class HGraphTestCase(unittest.TestCase):
             H.add_node(i)
 
     def test_add_lots_of_edges(self):
-        nodes = range(500)
+        nodes = list(range(500))
         H = HyperGraph()
 
         for i in range(1000):

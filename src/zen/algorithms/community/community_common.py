@@ -4,9 +4,9 @@
 
 
 def keys_of_max_value(dct):
-    it = dct.iteritems()
+    it = iter(dct.items())
     try:
-        key, val = it.next()
+        key, val = next(it)
     except:
         return []
     max_val = val
@@ -14,7 +14,7 @@ def keys_of_max_value(dct):
 
     while True:
         try:
-            key, val = it.next()
+            key, val = next(it)
             if val == max_val:
                 candidates.append(key)
             elif val > max_val:

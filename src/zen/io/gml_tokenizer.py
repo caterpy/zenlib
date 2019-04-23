@@ -1,5 +1,5 @@
 from zen.exceptions import *
-from gml_codec import BasicGMLCodec, ZenGMLCodec
+from .gml_codec import BasicGMLCodec, ZenGMLCodec
 import re
 import codecs
 import pdb

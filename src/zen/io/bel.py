@@ -113,10 +113,10 @@ def read_str(sbuffer, **kwargs):
     check_for_duplicates = kwargs.pop('ignore_duplicate_edges', False)
 
     if len(kwargs) > 0:
-        raise ZenException, 'Unknown keyword arguments: %s' % ', '.join(kwargs.keys())
+        raise ZenException('Unknown keyword arguments: %s' % ', '.join(list(kwargs.keys())))
 
     if check_for_duplicates and directed:
-        raise ZenException, 'ignore_duplicate_edges can only be set when directed = False'
+        raise ZenException('ignore_duplicate_edges can only be set when directed = False')
 
     # build the graph
     G = None
@@ -125,7 +125,7 @@ def read_str(sbuffer, **kwargs):
     elif directed == False:
         G = Graph()
     else:
-        raise ZenException, 'directed must be either True or False.'
+        raise ZenException('directed must be either True or False.')
 
     #####
     # convert the string into a bitvector
@@ -145,7 +145,7 @@ def read_str(sbuffer, **kwargs):
     offset += VERSION_LEN
 
     if version != 1:
-        raise Exception, 'Invalid file format or version number'
+        raise Exception('Invalid file format or version number')
 
     # read the num of indexes
     last_idx = bv2dec(bv, offset, NUM_INDEX_LEN)
@@ -156,7 +156,7 @@ def read_str(sbuffer, **kwargs):
 
     # build all nodes right now
     if node_obj_fxn is not None:
-        for x in xrange(last_idx+1):
+        for x in range(last_idx+1):
             n = node_obj_fxn(x)
             G.add_node(n)
     else:
@@ -169,7 +169,7 @@ def read_str(sbuffer, **kwargs):
     #####
     # Read the content: every edge
     if directed:
-        for ei in xrange(num_edges):
+        for ei in range(num_edges):
             idx1 = bv2dec(bv, offset, idx_size)
             offset += idx_size
             idx2 = bv2dec(bv, offset, idx_size)
@@ -177,7 +177,7 @@ def read_str(sbuffer, **kwargs):
 
             G.add_edge_(idx1, idx2)
     else:
-        for ei in xrange(num_edges):
+        for ei in range(num_edges):
             idx1 = bv2dec(bv, offset, idx_size)
             offset += idx_size
             idx2 = bv2dec(bv, offset, idx_size)
@@ -217,7 +217,7 @@ def read(fh, **kwargs):
     """
 
     close_fh = False
-    if type(fh) == types.StringType:
+    if type(fh) == bytes:
         close_fh = True
         fh = open(fh, 'r')
 
@@ -303,12 +303,12 @@ def store_bitvector_strict_order(G, max_index, node_index_fxn):
         # write them...
         a1 = uidx[1]
         for e in edges:
-            for i in xrange(idx_size):
+            for i in range(idx_size):
                 bv[offset + i] = a1[i] == '1'
             offset += idx_size
 
             a2 = vidx[1]
-            for i in xrange(idx_size):
+            for i in range(idx_size):
                 bv[offset + i] = a2[i] == '1'
             offset += idx_size
 
@@ -339,11 +339,11 @@ def store_bitvector(G):
         a1 = node2index_lookup[x]
         a2 = node2index_lookup[y]
 
-        for i in xrange(idx_size):
+        for i in range(idx_size):
             bv[offset + i] = a1[i] == '1'
         offset += idx_size
 
-        for i in xrange(idx_size):
+        for i in range(idx_size):
             bv[offset + i] = a2[i] == '1'
         offset += idx_size
 
@@ -362,7 +362,7 @@ def write_str(G):
     """
 
     if not G.is_compact():
-        raise ZenException, 'Graph G must be compact'
+        raise ZenException('Graph G must be compact')
 
     bv = None
     # if strict_order:
@@ -375,7 +375,7 @@ def write_str(G):
     num_chars = int(math.ceil(float(len(bv)) / 8.))
     result = array.array('c', ['0'] * num_chars)
 
-    for i in xrange(num_chars):
+    for i in range(num_chars):
         start = i * 8
         end = (i+1) * 8
         true_end = end
@@ -383,7 +383,7 @@ def write_str(G):
         if end > len(bv):
             end = len(bv)
 
-        for j in xrange(start, end):
+        for j in range(start, end):
             n <<= 1
             if bv[j]:
                 n |= 1
@@ -407,8 +407,9 @@ def write(G, fh):
     **Raises**:
             :py:exc:`zen.ZenException`: if the graph is not compact.
     """
+
     close_fh = False
-    if type(fh) == types.StringType:
+    if type(fh) == bytes:
         close_fh = True
         fh = open(fh, 'w')
 
@@ -432,7 +433,7 @@ def dec2bv(i, bv, offset, max_len):
     num_bits = math.ceil(math.log(i+1, 2))
 
     if num_bits > max_len:
-        raise Exception, 'Too many bits being stored.'
+        raise Exception('Too many bits being stored.')
 
     pos = max_len + offset - 1
     while i > 0:
@@ -450,7 +451,7 @@ def dec2bin(i, max_len):
     num_bits = math.ceil(math.log(i+1, 2))
 
     if num_bits > max_len:
-        raise Exception, 'Too many bits being stored.'
+        raise Exception('Too many bits being stored.')
 
     A = array.array('c', ['0'] * max_len)
     pos = max_len - 1
@@ -466,7 +467,7 @@ def dec2bin(i, max_len):
 def bv2dec(bv, offset, length):
     n = 0
 
-    for pos in xrange(offset, offset+length):
+    for pos in range(offset, offset+length):
         n <<= 1
         if bv[pos] == True:
             n |= 1
@@ -483,11 +484,11 @@ def main():
     G.E.add(1, 2)
     G.E.add(2, 3)
     G.E.add(3, 4)
-    idx_lookup = dict([(n, i) for n, i in zip(G.V, xrange(len(G.V)))])
+    idx_lookup = dict([(n, i) for n, i in zip(G.V, range(len(G.V)))])
     #bv = store_bitvector(G, len(idx_lookup)-1, lambda x: idx_lookup[x])
     s = store_str(G, strict_order=True)
     G2 = read_str(s)
-    print len(G2.V), len(G2.E), G2.topology()
+    print ("{} {}".format(len(G2.V), len(G2.E), G2.topology()))
 
 
 if __name__ == '__main__':

@@ -16,7 +16,7 @@ class GraphComponentsTestCase(unittest.TestCase):
 
         comps = G.components()
 
-        self.assertEquals(len(comps), 2)
+        self.assertEqual(len(comps), 2)
 
 
 class GraphBuildFromTestCase(unittest.TestCase):
@@ -35,8 +35,8 @@ class GraphBuildFromTestCase(unittest.TestCase):
         A = np.ones((10, 10))
         G = Graph.from_adj_matrix(A)
 
-        self.assertEquals(len(G), 10)
-        self.assertEquals(G.size(), 55)
+        self.assertEqual(len(G), 10)
+        self.assertEqual(G.size(), 55)
 
         # done
 
@@ -46,8 +46,8 @@ class GraphBuildFromTestCase(unittest.TestCase):
         A = np.ones((10, 10))
         G = Graph.from_adj_matrix(A, node_obj_fxn=None)
 
-        self.assertEquals(len(G), 10)
-        self.assertEquals(G.size(), 55)
+        self.assertEqual(len(G), 10)
+        self.assertEqual(G.size(), 55)
 
         with self.assertRaises(ZenException):
             G.nodes()
@@ -64,15 +64,15 @@ class GraphCompact(unittest.TestCase):
         G.add_edge(3, 4)
         G.rm_node(2)
 
-        self.assertEquals(G.max_node_idx, 3)
+        self.assertEqual(G.max_node_idx, 3)
 
         G.compact()
 
-        self.assertEquals(G.max_node_idx, 2)
-        self.assertEquals(G.node_idx(1), 0)
-        self.assertEquals(G.node_idx(3), 2)
-        self.assertEquals(G.node_idx(4), 1)
-        self.assertEquals(G.edge_idx(3, 4), 0)
+        self.assertEqual(G.max_node_idx, 2)
+        self.assertEqual(G.node_idx(1), 0)
+        self.assertEqual(G.node_idx(3), 2)
+        self.assertEqual(G.node_idx(4), 1)
+        self.assertEqual(G.edge_idx(3, 4), 0)
 
         G.validate()
 
@@ -82,16 +82,16 @@ class GraphCompact(unittest.TestCase):
         G.add_edge(2, 3)
         G.add_edge(3, 3)
 
-        self.assertEquals(G.degree(3), 3)
+        self.assertEqual(G.degree(3), 3)
 
         G.rm_node(2)
 
         G.compact()
 
-        self.assertEquals(G.max_node_idx, 1)
-        self.assertEquals(G.node_idx(3), 1)
-        self.assertEquals(G.edge_idx(3, 3), 0)
-        self.assertEquals(G.degree(3), 2)
+        self.assertEqual(G.max_node_idx, 1)
+        self.assertEqual(G.node_idx(3), 1)
+        self.assertEqual(G.edge_idx(3, 3), 0)
+        self.assertEqual(G.degree(3), 2)
 
         G.validate()
 
@@ -108,24 +108,24 @@ class GraphCompact(unittest.TestCase):
         G.add_edge(5, 3)
         G.add_edge(3, 3)
 
-        self.assertEquals(G.degree(3), 5)
+        self.assertEqual(G.degree(3), 5)
 
         G.rm_node(2)
 
-        self.assertEquals(G.degree(3), 4)
+        self.assertEqual(G.degree(3), 4)
 
         G.compact()
 
-        self.assertEquals(G.max_node_idx, 3)
-        self.assertEquals(G.node_idx(3), 1)
-        self.assertEquals(G.edge_idx(3, 3), 0)
-        self.assertEquals(G.degree(3), 4)
+        self.assertEqual(G.max_node_idx, 3)
+        self.assertEqual(G.node_idx(3), 1)
+        self.assertEqual(G.edge_idx(3, 3), 0)
+        self.assertEqual(G.degree(3), 4)
 
         self.assertTrue(G.is_compact())
 
         G.rm_edge(3, 3)
 
-        self.assertEquals(G.degree(3), 2)
+        self.assertEqual(G.degree(3), 2)
 
         G.validate()
 
@@ -147,11 +147,11 @@ class GraphCompact(unittest.TestCase):
         G.add_edge(2, 3)
         G.rm_edge(1, 2)
 
-        self.assertEquals(G.max_edge_idx, 1)
+        self.assertEqual(G.max_edge_idx, 1)
 
         G.compact()
 
-        self.assertEquals(G.max_edge_idx, 0)
+        self.assertEqual(G.max_edge_idx, 0)
 
         G.validate()
 
@@ -217,9 +217,9 @@ class GraphAddXFunctions(unittest.TestCase):
         graph.add_node_x(2, 10, 2, None)
 
         nodes = graph.nodes_()
-        self.assertEquals(0, nodes[0])
-        self.assertEquals(1, nodes[1])
-        self.assertEquals(2, nodes[2])
+        self.assertEqual(0, nodes[0])
+        self.assertEqual(1, nodes[1])
+        self.assertEqual(2, nodes[2])
 
         graph.validate()
 
@@ -351,7 +351,7 @@ class GraphTestCase(unittest.TestCase):
         G = Graph()
         G.add_nodes(10)
 
-        self.assertEquals(len(G), 10)
+        self.assertEqual(len(G), 10)
 
         G.validate()
 
@@ -359,10 +359,10 @@ class GraphTestCase(unittest.TestCase):
         G = Graph()
         G.add_nodes(10, lambda x: str(x))
 
-        self.assertEquals(len(G), 10)
+        self.assertEqual(len(G), 10)
 
         for n_, n in G.nodes_iter_(obj=True):
-            self.assertEquals(str(n_), n)
+            self.assertEqual(str(n_), n)
 
         G.validate()
 
@@ -374,15 +374,15 @@ class GraphTestCase(unittest.TestCase):
 
         M = G.matrix()
         inf = float('infinity')
-        self.assertEquals(M[0, 0], 0)
-        self.assertEquals(M[0, 1], 1)
-        self.assertEquals(M[0, 2], 0)
-        self.assertEquals(M[1, 0], 1)
-        self.assertEquals(M[1, 1], 0)
-        self.assertEquals(M[1, 2], 1)
-        self.assertEquals(M[2, 0], 0)
-        self.assertEquals(M[2, 1], 1)
-        self.assertEquals(M[2, 2], 1)
+        self.assertEqual(M[0, 0], 0)
+        self.assertEqual(M[0, 1], 1)
+        self.assertEqual(M[0, 2], 0)
+        self.assertEqual(M[1, 0], 1)
+        self.assertEqual(M[1, 1], 0)
+        self.assertEqual(M[1, 2], 1)
+        self.assertEqual(M[2, 0], 0)
+        self.assertEqual(M[2, 1], 1)
+        self.assertEqual(M[2, 2], 1)
 
         G.validate()
 
@@ -572,8 +572,8 @@ class GraphTestCase(unittest.TestCase):
         G.add_edge('hello', 'there')
         G.add_edge('hello', 'world')
 
-        self.assertEqual(type(G.nodes()), types.ListType)
-        self.assertEqual(type(G.neighbors('hello')), types.ListType)
+        self.assertEqual(type(G.nodes()), list)
+        self.assertEqual(type(G.neighbors('hello')), list)
         self.assertEqual(len(G.neighbors('hello')), 2)
 
         G.validate()
@@ -609,7 +609,7 @@ class GraphTestCase(unittest.TestCase):
         try:
             G.add_edge('1', '2')
             success = True
-        except ZenException, e:
+        except ZenException as e:
             if not str(e).startswith('Duplicate edges'):
                 self.fail('Incorrect exception: %s' % str(e))
 
@@ -622,7 +622,7 @@ class GraphTestCase(unittest.TestCase):
         try:
             G.add_edge('2', '1')
             success = True
-        except ZenException, e:
+        except ZenException as e:
             if not str(e).startswith('Duplicate edges'):
                 self.fail('Incorrect exception: %s' % str(e))
 
@@ -642,7 +642,7 @@ class GraphTestCase(unittest.TestCase):
         for i in range(10):
             G.add_node()
 
-        order = range(10)
+        order = list(range(10))
         order.remove(5)
         random.shuffle(order)
 
@@ -803,8 +803,8 @@ class GraphTestCase(unittest.TestCase):
         n1_all_raw = list(G.neighbors_iter_(n1))
         n1_all = set(n1_all_raw)
 
-        self.assertEquals(n1_all, set([n2, n3, n4]))
-        self.assertEquals(len(n1_all_raw), 3)
+        self.assertEqual(n1_all, set([n2, n3, n4]))
+        self.assertEqual(len(n1_all_raw), 3)
 
         G.validate()
 
@@ -822,7 +822,7 @@ class GraphTestCase(unittest.TestCase):
         for n in G.neighbors_iter_(n1):
             count += 1
 
-        self.assertEquals(count, 1100)
+        self.assertEqual(count, 1100)
 
         G.validate()
 
@@ -868,7 +868,7 @@ class GraphTestCase(unittest.TestCase):
         try:
             for nobj, data in G.neighbors_iter('1', data=True):
                 self.assertEqual(data, None)
-        except ZenException, e:
+        except ZenException as e:
             success = False
             self.assertTrue('does not have a node object' in str(e))
 
@@ -919,7 +919,7 @@ class GraphTestCase(unittest.TestCase):
         try:
             for x, y, data in G.edges(data=True):
                 pass
-        except ZenException, e:
+        except ZenException as e:
             if str(e).startswith('Edge'):
                 success = False
 
@@ -1001,7 +1001,7 @@ class GraphTestCase(unittest.TestCase):
         n2 = G.add_node()
         e1 = G.add_edge_(n1, n2, 'blah')
 
-        self.assertEquals(e1, G.edge_idx_(n1, n2))
+        self.assertEqual(e1, G.edge_idx_(n1, n2))
 
         G.validate()
 

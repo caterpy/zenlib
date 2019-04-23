@@ -140,13 +140,13 @@ class TestZenFibonacciHeap(unittest.TestCase):
 
         n1 = H.insert(1, 'this is a string')
 
-        self.assertEquals('this is a string', H.get_node_data(n1))
+        self.assertEqual('this is a string', H.get_node_data(n1))
 
         n2 = H.insert(2)
         H.replace_data(n2, (1, 2))
-        self.assertEquals((1, 2), H.get_node_data(n2))
+        self.assertEqual((1, 2), H.get_node_data(n2))
 
-        self.assertEquals('this is a string', H.extract())
+        self.assertEqual('this is a string', H.extract())
 
     def test_speed_compare(self):
 

@@ -46,7 +46,7 @@ The UbigraphRenderer class
 """
 import logging
 import time
-import xmlrpclib
+import xmlrpc.client
 
 from zen.graph import Graph
 from zen.digraph import DiGraph
@@ -74,10 +74,10 @@ class UbigraphRenderer(object):
         self._event_delay = kwargs.pop('event_delay', 0)
 
         if len(kwargs) > 0:
-            raise ZenException, 'Unexpected remaining arguments: %s' % kwargs.keys()
+            raise ZenException('Unexpected remaining arguments: %s' % list(kwargs.keys()))
 
         logger.debug('connecting to ubigraph server: %s' % url)
-        self.server = xmlrpclib.Server(url)
+        self.server = xmlrpc.client.Server(url)
         self.server_graph = self.server.ubigraph
 
         self.highlighted_node_style = self.server_graph.new_vertex_style(0)
@@ -327,10 +327,10 @@ class UbigraphRenderer(object):
         return
 
     def highlight_edges(self, edges):
-        self.highlight_edges_(map(lambda x: self._graph.edge_idx(*x), edges))
+        self.highlight_edges_([self._graph.edge_idx(*x) for x in edges])
 
     def highlight_nodes(self, nodes):
-        self.highlight_nodes_(map(lambda x: self._graph.node_idx(x), nodes))
+        self.highlight_nodes_([self._graph.node_idx(x) for x in nodes])
 
 
 if __name__ == '__main__':

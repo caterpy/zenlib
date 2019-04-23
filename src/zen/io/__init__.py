@@ -50,6 +50,6 @@ import edgelist
 import hedgelist
 import rdot
 import scn
-import bel
+from . import bel
 import memlist
-import gml
+from . import gml

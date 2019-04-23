@@ -17,9 +17,9 @@ class Pred2PathTestCase(unittest.TestCase):
 
         D, P = dijkstra_path_(G, 0)
 
-        self.assertEquals(pred2path_(0, 2, P), [0, 1, 2])
+        self.assertEqual(pred2path_(0, 2, P), [0, 1, 2])
 
-        self.assertEquals(pred2path_(0, 3, P), None)
+        self.assertEqual(pred2path_(0, 3, P), None)
 
     def test_pred2path_dijkstra(self):
         G = DiGraph()
@@ -29,6 +29,6 @@ class Pred2PathTestCase(unittest.TestCase):
 
         R = dijkstra_path(G, 1)
 
-        self.assertEquals(pred2path(1, 3, R), [1, 2, 3])
+        self.assertEqual(pred2path(1, 3, R), [1, 2, 3])
 
-        self.assertEquals(pred2path(1, 4, R), None)
+        self.assertEqual(pred2path(1, 4, R), None)

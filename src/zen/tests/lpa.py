@@ -3,7 +3,9 @@ import os
 import os.path
 
 from zen.algorithms.community import lpa
+from zen.util import cmp
 import zen
+
 
 
 class RealNetworksLPATestCase(unittest.TestCase):
@@ -21,11 +23,12 @@ class RealNetworksLPATestCase(unittest.TestCase):
         # verify that all nodes are in the communities
         nodes = set(G.nodes())
 
-        print 'NET:', sorted(G.nodes(), cmp=lambda x, y: cmp(int(x), int(y)))
+        print ('NET: {}'.format(
+            sorted(G.nodes(), cmp=lambda x, y: cmp(int(x), int(y)))))
 
         for c in comms:
-            print sorted(c.nodes(), cmp=lambda x, y: cmp(int(x), int(y)))
-            print sorted(c.nodes_())
+            print (sorted(c.nodes(), cmp=lambda x, y: cmp(int(x), int(y))))
+            print (sorted(c.nodes_()))
             for n in c:
                 if n not in nodes:
                     self.fail('node was not found in node set: %s' % str(n))

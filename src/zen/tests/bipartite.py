@@ -29,8 +29,8 @@ class BipartiteTestCase(unittest.TestCase):
         n1 = G.add_u_node(1)
         eidx = G.add_edge(1, 2)
 
-        self.assertEquals((1, 2), G.uv_endpoints(eidx))
-        self.assertEquals((n1, n2), G.uv_endpoints_(eidx))
+        self.assertEqual((1, 2), G.uv_endpoints(eidx))
+        self.assertEqual((n1, n2), G.uv_endpoints_(eidx))
 
     def test_uv_edges(self):
         G = zen.BipartiteGraph()
@@ -52,13 +52,13 @@ class BipartiteTestCase(unittest.TestCase):
         for x, y, data in G.uv_edges(data=True):
             self.assertTrue(G.is_in_U(x))
             self.assertTrue(G.is_in_V(y))
-            self.assertEquals(data, True)
+            self.assertEqual(data, True)
 
         for x, y, data, weight in G.uv_edges(weight=True, data=True):
             self.assertTrue(G.is_in_U(x))
             self.assertTrue(G.is_in_V(y))
-            self.assertEquals(data, True)
-            self.assertEquals(weight, 1)
+            self.assertEqual(data, True)
+            self.assertEqual(weight, 1)
 
         return
 
@@ -82,13 +82,13 @@ class BipartiteTestCase(unittest.TestCase):
         for x, y, data in G.uv_edges_iter(data=True):
             self.assertTrue(G.is_in_U(x))
             self.assertTrue(G.is_in_V(y))
-            self.assertEquals(data, True)
+            self.assertEqual(data, True)
 
         for x, y, data, weight in G.uv_edges_iter(weight=True, data=True):
             self.assertTrue(G.is_in_U(x))
             self.assertTrue(G.is_in_V(y))
-            self.assertEquals(data, True)
-            self.assertEquals(weight, 1)
+            self.assertEqual(data, True)
+            self.assertEqual(weight, 1)
 
         return
 

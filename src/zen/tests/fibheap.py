@@ -97,14 +97,14 @@ class TestZenFibonacciHeap(unittest.TestCase):
         H.insert_node(n3)
         H.insert_node(n4)
 
-        self.assertEquals(n4, n1.get_left())
-        self.assertEquals(n1, n4.get_right())
-        self.assertEquals(n2, n1.get_right())
-        self.assertEquals(n1, n2.get_left())
-        self.assertEquals(n3, n2.get_right())
-        self.assertEquals(n2, n3.get_left())
-        self.assertEquals(n4, n3.get_right())
-        self.assertEquals(n3, n4.get_left())
+        self.assertEqual(n4, n1.get_left())
+        self.assertEqual(n1, n4.get_right())
+        self.assertEqual(n2, n1.get_right())
+        self.assertEqual(n1, n2.get_left())
+        self.assertEqual(n3, n2.get_right())
+        self.assertEqual(n2, n3.get_left())
+        self.assertEqual(n4, n3.get_right())
+        self.assertEqual(n3, n4.get_left())
 
     def test_child_ref(self):
 
@@ -124,7 +124,7 @@ class TestZenFibonacciHeap(unittest.TestCase):
 
         H.extract_node()
 
-        self.assertEquals(n3, n2.get_child())
+        self.assertEqual(n3, n2.get_child())
         self.assertIsNone(n3.get_child())
 
     def test_object_data(self):
@@ -133,16 +133,16 @@ class TestZenFibonacciHeap(unittest.TestCase):
 
         n1 = FibNode(1, 'this is a string')
 
-        self.assertEquals('this is a string', n1.get_data())
+        self.assertEqual('this is a string', n1.get_data())
 
         n2 = FibNode(2)
         n2.set_data((1, 2))
-        self.assertEquals((1, 2), n2.get_data())
+        self.assertEqual((1, 2), n2.get_data())
 
         H.insert_node(n1)
         H.insert_node(n2)
 
-        self.assertEquals('this is a string', H.extract_min_node_data())
+        self.assertEqual('this is a string', H.extract_min_node_data())
 
     def test_speed_compare(self):
 

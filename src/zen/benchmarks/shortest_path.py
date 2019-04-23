@@ -60,7 +60,7 @@ class UUERSSSPBenchmark(Benchmark):
                     self.ER_G.add_edge_(i, j)
 
         # generate some endpoints
-        self.sources = random.sample(range(self.NUM_NODES), self.NUM_SOURCES)
+        self.sources = random.sample(list(range(self.NUM_NODES)), self.NUM_SOURCES)
 
     def bm_zen(self):
         for i in self.sources:
@@ -117,7 +117,7 @@ class UERDijkstraBenchmark(Benchmark):
                     self.ER_G.add_edge_(i, j)
 
         # generate some endpoints
-        self.sources = random.sample(range(self.NUM_NODES), self.NUM_SOURCES)
+        self.sources = random.sample(list(range(self.NUM_NODES)), self.NUM_SOURCES)
 
     def bm_zen(self):
         for i in self.sources:

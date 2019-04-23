@@ -30,7 +30,7 @@ _SQRT3OVER2 = math.sqrt(3) / 2.
 
 def _unzip(l):
     # return [x for (x,y) in l], [y for (x,y) in l]
-    return zip(*l)
+    return list(zip(*l))
 
 
 def _normalize(xs):
@@ -67,7 +67,7 @@ def _project(s):
     """Maps (x,y,z) coordinates to planar-simplex."""
     # Is s an appropriate sequence or just a single point?
     try:
-        return _unzip(map(_project_point, s))
+        return _unzip(list(map(_project_point, s)))
     except TypeError:
         return _project_point(s)
     except IndexError:  # for numpy arrays
@@ -145,7 +145,7 @@ def _heatmap(d, steps, cmap_name=None):
     a = min(d.values())
     b = max(d.values())
     # Color data triangles.
-    for k, v in d.items():
+    for k, v in list(d.items()):
         i, j = k
         vertices = _triangle_coordinates(i, j, steps)
         x, y = _unzip(vertices)
@@ -388,11 +388,11 @@ def _plot_profiles(items, **kwargs):
             elif len(p) == 3:
                 pts.append(p)
             else:
-                raise TypeError, 'plot_profiles supports lists of tupes/lists of length 2 or 3 only; found length %i.' % len(p)
+                raise TypeError('plot_profiles supports lists of tupes/lists of length 2 or 3 only; found length %i.' % len(p))
         elif type(item) is DiGraph:
             pts.append(control_profile(item, normalized=True))
         else:
-            raise TypeError, 'items of type %s cannot be converted into control profiles' % str(type(item))
+            raise TypeError('items of type %s cannot be converted into control profiles' % str(type(item)))
 
     if heatmap:
         if cmap is None:
@@ -453,16 +453,16 @@ def profile_heatmap_weighted(items, weights=None, **kwargs):
     if weights is None:  # if no weights are given make them weighted equally
         weights = [1.0/float(len(items)) for i in range(len(items))]
     if len(weights) != len(items):
-        raise Exception, 'weights parameter must be the same length as items.'
+        raise Exception('weights parameter must be the same length as items.')
 
     for i, item in enumerate(items):
         d = _plot_profiles(item, heatmap=True, color=color,
                            num_steps=num_steps, cmap=cmap, plot_heatmap=False)
         if D is None:
             D = dict()
-            for point in d.keys():
+            for point in list(d.keys()):
                 D[point] = 0
-        for point, val in d.items():
+        for point, val in list(d.items()):
             D[point] += float(val)*weights[i]/float(sum(weights))
 
     if cmap is None:

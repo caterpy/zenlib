@@ -16,7 +16,7 @@ class HopcroftKarpTestCase(unittest.TestCase):
 
         m = matching.maximum_matching_(G)
 
-        self.assertEquals(len(m), 2)
+        self.assertEqual(len(m), 2)
 
     def test_simple2(self):
         G = BipartiteGraph()
@@ -39,8 +39,8 @@ class HopcroftKarpTestCase(unittest.TestCase):
 
         m = matching.hopcroft_karp_(G)
 
-        self.assertEquals(len(m), 4)
-        self.assertEquals(set(m), set([e1, e3, e5, e6]))
+        self.assertEqual(len(m), 4)
+        self.assertEqual(set(m), set([e1, e3, e5, e6]))
 
 
 def get_driver_nodes(G):
@@ -71,8 +71,8 @@ class DirectedMaximumMatchingTextCase(unittest.TestCase):
 
         m = matching.maximum_matching_(G)
 
-        self.assertEquals(len(m), 2)
-        self.assertEquals(set(m), set([e1, e3]))
+        self.assertEqual(len(m), 2)
+        self.assertEqual(set(m), set([e1, e3]))
 
     def test_controllability(self):
         G = DiGraph()
@@ -86,7 +86,7 @@ class DirectedMaximumMatchingTextCase(unittest.TestCase):
 
         ND = get_driver_nodes(G)
 
-        self.assertEquals(set(ND), set([1, 4]))
+        self.assertEqual(set(ND), set([1, 4]))
 
 
 if __name__ == '__main__':

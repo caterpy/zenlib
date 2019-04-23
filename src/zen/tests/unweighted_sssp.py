@@ -283,7 +283,7 @@ class UWSSSPLengthTestCase(unittest.TestCase):
 
         d = single_source_shortest_path_length(G, 's', 'x')
 
-        self.assertEquals(float('infinity'), d)
+        self.assertEqual(float('infinity'), d)
 
     def test_sssp_directed(self):
 
@@ -328,7 +328,7 @@ class UWSSSPLengthTestCase(unittest.TestCase):
         d = single_source_shortest_path_length(
             G, 's', 't')  # x should not be found
 
-        self.assertEquals(2, d)
+        self.assertEqual(2, d)
 
 
 class UWSSSPTestCase(unittest.TestCase):
@@ -372,8 +372,8 @@ class UWSSSPTestCase(unittest.TestCase):
 
         d, p = single_source_shortest_path(G, 's', 'x')
 
-        self.assertEquals(float('infinity'), d)
-        self.assertEquals(None, p)
+        self.assertEqual(float('infinity'), d)
+        self.assertEqual(None, p)
 
     def test_sssp_directed(self):
 
@@ -418,9 +418,9 @@ class UWSSSPTestCase(unittest.TestCase):
         d, p = single_source_shortest_path(
             G, 's', 't')  # x should not be found
 
-        self.assertEquals(2, d)
+        self.assertEqual(2, d)
 
-        self.assertEquals(['s', 'y', 't'], p)
+        self.assertEqual(['s', 'y', 't'], p)
 
 
 if __name__ == '__main__':

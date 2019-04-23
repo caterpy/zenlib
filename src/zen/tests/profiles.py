@@ -11,10 +11,10 @@ class ProfileTestCase(TestCase):
         G.add_edge(4, 5)
 
         cp = zen.control.profile(G, normalized=False)
-        self.assertEquals(cp, (2, 0, 0))
+        self.assertEqual(cp, (2, 0, 0))
 
         cp = zen.control.profile(G)
-        self.assertEquals(cp, (1, 0, 0))
+        self.assertEqual(cp, (1, 0, 0))
 
     def test_an_external_dilation(self):
         G = zen.DiGraph()
@@ -23,10 +23,10 @@ class ProfileTestCase(TestCase):
         G.add_edge(2, 4)
 
         cp = zen.control.profile(G, normalized=False)
-        self.assertEquals(cp, (1, 1, 0))
+        self.assertEqual(cp, (1, 1, 0))
 
         cp = zen.control.profile(G)
-        self.assertEquals(cp, (0.5, 0.5, 0))
+        self.assertEqual(cp, (0.5, 0.5, 0))
 
     def test_an_internal_dilation(self):
         G = zen.DiGraph()
@@ -37,10 +37,10 @@ class ProfileTestCase(TestCase):
         G.add_edge(5, 4)
 
         cp = zen.control.profile(G, normalized=False)
-        self.assertEquals(cp, (1, 0, 1))
+        self.assertEqual(cp, (1, 0, 1))
 
         cp = zen.control.profile(G)
-        self.assertEquals(cp, (0.5, 0, 0.5))
+        self.assertEqual(cp, (0.5, 0, 0.5))
 
     def test_no_controls(self):
         G = zen.DiGraph()
@@ -50,7 +50,7 @@ class ProfileTestCase(TestCase):
         G.add_edge(4, 1)
 
         cp = zen.control.profile(G, normalized=False)
-        self.assertEquals(cp, (0, 0, 0))
+        self.assertEqual(cp, (0, 0, 0))
 
         cp = zen.control.profile(G)
-        self.assertEquals(cp, (0, 0, 0))
+        self.assertEqual(cp, (0, 0, 0))

@@ -159,10 +159,10 @@ class EdgeListReadTestCase(unittest.TestCase):
         self.assertEqual(len(G), 4)
         self.assertEqual(G.size(), 4)
 
-        self.assertEquals(G.weight('1', '2'), 0)
-        self.assertEquals(G.weight('2', '3'), -5)
-        self.assertEquals(G.weight('1', '3'), 2.3)
-        self.assertEquals(G.weight('3', '62'), -3.2)
+        self.assertEqual(G.weight('1', '2'), 0)
+        self.assertEqual(G.weight('2', '3'), -5)
+        self.assertEqual(G.weight('1', '3'), 2.3)
+        self.assertEqual(G.weight('3', '62'), -3.2)
 
     def test_read_undirected_weighted(self):
         """
@@ -175,12 +175,12 @@ class EdgeListReadTestCase(unittest.TestCase):
         self.assertEqual(len(G), 4)
         self.assertEqual(G.size(), 4)
 
-        self.assertEquals(G.weight('1', '2'), 0)
-        self.assertEquals(G.weight('2', '3'), -5)
-        self.assertEquals(G.weight('3', '2'), -5)
-        self.assertEquals(G.weight('1', '3'), 2.3)
-        self.assertEquals(G.weight('3', '62'), -3.2)
-        self.assertEquals(G.weight('62', '3'), -3.2)
+        self.assertEqual(G.weight('1', '2'), 0)
+        self.assertEqual(G.weight('2', '3'), -5)
+        self.assertEqual(G.weight('3', '2'), -5)
+        self.assertEqual(G.weight('1', '3'), 2.3)
+        self.assertEqual(G.weight('3', '62'), -3.2)
+        self.assertEqual(G.weight('62', '3'), -3.2)
 
     def test_read_helist1(self):
         fname = path.join(path.dirname(__file__), 'test1.helist')

@@ -2,7 +2,7 @@ from zen.exceptions import ZenException
 from numbers import Number
 from collections import Hashable, Iterable
 import re
-import htmlentitydefs
+import html.entities
 
 
 class Encoder:
@@ -15,7 +15,7 @@ class Encoder:
         elif isinstance(data_to_encode, Number):
             return self.encode_nbr(data_to_encode)
 
-        elif isinstance(data_to_encode, basestring):
+        elif isinstance(data_to_encode, str):
             return self.encode_str(data_to_encode)
 
         else:
@@ -49,7 +49,7 @@ class Decoder:
     def decode(self, data_to_decode):
         # Validation
         try:
-            assert(isinstance(data_to_decode, basestring))
+            assert(isinstance(data_to_decode, str))
         except AssertionError:
             raise ZenException('Decoder recieved non-string object: %s(%s) '
                                % (str(data_to_decode), str(type(data_to_decode))))
@@ -177,15 +177,15 @@ def unescape(text):
             # character reference
             try:
                 if text[:3] == "&#x":
-                    return unichr(int(text[3:-1], 16))
+                    return chr(int(text[3:-1], 16))
                 else:
-                    return unichr(int(text[2:-1]))
+                    return chr(int(text[2:-1]))
             except ValueError:
                 pass
         else:
             # named entity
             try:
-                text = unichr(htmlentitydefs.name2codepoint[text[1:-1]])
+                text = chr(html.entities.name2codepoint[text[1:-1]])
             except KeyError:
                 pass
         return text  # leave as is

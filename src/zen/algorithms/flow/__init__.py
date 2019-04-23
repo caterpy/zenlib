@@ -12,4 +12,4 @@ Min-cut functions
 
 """
 
-from min_cut import *
+from .min_cut import *

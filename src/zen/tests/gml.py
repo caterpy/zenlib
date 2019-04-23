@@ -78,15 +78,15 @@ class GMLReadTestCase(unittest.TestCase):
     def test_non_asci_char(self):
         G = Graph()
 
-        G.add_node(u'\u2660')
-        G.add_node(u'\u2663')
-        G.add_node(u'\u2665')
-        G.add_node(u'\u2666')
+        G.add_node('\u2660')
+        G.add_node('\u2663')
+        G.add_node('\u2665')
+        G.add_node('\u2666')
 
-        G.add_edge(u'\u2663', u'\u2665')
-        G.add_edge(u'\u2660', u'\u2666')
-        G.add_edge(u'\u2665', u'\u2666')
-        G.add_edge(u'\u2660', u'\u2663')
+        G.add_edge('\u2663', '\u2665')
+        G.add_edge('\u2660', '\u2666')
+        G.add_edge('\u2665', '\u2666')
+        G.add_edge('\u2660', '\u2663')
 
         gml.write(G, 'test4.gml')
 

@@ -9,7 +9,7 @@ class UndirectedDuplicationDivergenceIKYTestCase(unittest.TestCase):
         try:
             zen.generating.duplication_divergence_iky(10, 0.5, blah=10)
             self.fail('blah should not be accepted as a keyword argument')
-        except zen.ZenException, e:
+        except zen.ZenException as e:
             pass
 
     def test_seed(self):
@@ -27,7 +27,7 @@ class UndirectedDuplicationDivergenceIKYTestCase(unittest.TestCase):
     def test_basic(self):
         G = zen.generating.duplication_divergence_iky(10, 0.5)
 
-        self.assertEquals(len(G), 10)
+        self.assertEqual(len(G), 10)
 
 
 class DirectedDuplicationDivergenceIKYTestCase(unittest.TestCase):
@@ -37,7 +37,7 @@ class DirectedDuplicationDivergenceIKYTestCase(unittest.TestCase):
             zen.generating.duplication_divergence_iky(
                 10, 0.5, blah=10, directed=True)
             self.fail('blah should not be accepted as a keyword argument')
-        except zen.ZenException, e:
+        except zen.ZenException as e:
             pass
 
     def test_directed(self):
@@ -63,4 +63,4 @@ class DirectedDuplicationDivergenceIKYTestCase(unittest.TestCase):
     def test_basic(self):
         G = zen.generating.duplication_divergence_iky(10, 0.5, directed=True)
 
-        self.assertEquals(len(G), 10)
+        self.assertEqual(len(G), 10)

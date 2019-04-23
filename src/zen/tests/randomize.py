@@ -12,7 +12,7 @@ class RandomizeTestCase(unittest.TestCase):
         try:
             choose_node(G, blah=10)
             self.fail('blah should not be accepted as a keyword argument')
-        except ZenException, e:
+        except ZenException as e:
             pass
 
     def test_choose_node(self):
@@ -21,7 +21,7 @@ class RandomizeTestCase(unittest.TestCase):
 
         # build the graph
         G = Graph()
-        nodes = range(NUM_NODES)
+        nodes = list(range(NUM_NODES))
         for i in nodes:
             G.add_node(i)
 
@@ -44,7 +44,7 @@ class RandomizeTestCase(unittest.TestCase):
         try:
             choose_edge(G, blah=10)
             self.fail('blah should not be accepted as a keyword argument')
-        except ZenException, e:
+        except ZenException as e:
             pass
 
     def test_choose_edge(self):
@@ -53,7 +53,7 @@ class RandomizeTestCase(unittest.TestCase):
 
         # build a fully-connected graph
         G = Graph()
-        nodes = range(NUM_NODES)
+        nodes = list(range(NUM_NODES))
         for i in nodes:
             G.add_node(i)
 
@@ -81,7 +81,7 @@ class RandomizeTestCase(unittest.TestCase):
         try:
             shuffle(G, blah=10)
             self.fail('blah should not be accepted as a keyword argument')
-        except ZenException, e:
+        except ZenException as e:
             pass
 
     def test_shuffle(self):
@@ -122,7 +122,7 @@ class RandomizeTestCase(unittest.TestCase):
         d2 = ddist(G2)
 
         for v1, v2 in zip(d1, d2):
-            self.assertEquals(v1, v2)
+            self.assertEqual(v1, v2)
 
     def test_dg_shuffle_keep_degree(self):
         G = DiGraph()
@@ -139,7 +139,7 @@ class RandomizeTestCase(unittest.TestCase):
         d2 = ddist(G2)
 
         for v1, v2 in zip(d1, d2):
-            self.assertEquals(v1, v2)
+            self.assertEqual(v1, v2)
 
     def test_dg_shuffle_one_node_network_mix_iodegrees(self):
         G = DiGraph()
@@ -170,7 +170,7 @@ class RandomizeTestCase(unittest.TestCase):
         # 4 has out-degree = 2
         # 5 has out-degree = 4
         out_degree = [G.out_degree(i) for i in range(1, 7)]  # [3,1,0,2,4,0]
-        self.assertEquals(out_degree, [3, 1, 0, 2, 4, 0])
+        self.assertEqual(out_degree, [3, 1, 0, 2, 4, 0])
 
         G2 = shuffle(G, keep_degree=True)
         G3 = shuffle(G, keep_degree=True, link_iodegrees=False)
@@ -178,9 +178,9 @@ class RandomizeTestCase(unittest.TestCase):
         out_degree2 = [G2.out_degree(i) for i in range(1, 7)]
         out_degree3 = [G3.out_degree(i) for i in range(1, 7)]
 
-        self.assertEquals(out_degree, out_degree2)
-        self.assertNotEquals(out_degree, out_degree3)
-        self.assertEquals(set(out_degree), set(out_degree3))
+        self.assertEqual(out_degree, out_degree2)
+        self.assertNotEqual(out_degree, out_degree3)
+        self.assertEqual(set(out_degree), set(out_degree3))
 
 
 if __name__ == '__main__':
