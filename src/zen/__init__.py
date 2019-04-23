@@ -29,42 +29,43 @@ in Zen we use the following conventions:
 	- Any function that is called "<fxn>(...)" and returns an edge or node will return an object. Any 
 		function that is called "<fxn>_(...)" and returns an edge or node will return an index.
 """
+__all__ = ['algorithms', 'benchmarks', 'control', 'drawing', 'generating', 'io', 'layout', 'util']
 
 # import graphs
-from graph import *
-from digraph import *
-from bipartite import *
-from hypergraph import *
+from zen.graph import *
+from zen.digraph import *
+from zen.bipartite import *
+from zen.hypergraph import *
 
 # basic degree properties
-from degree import *
+from zen.degree import *
 
 # randomization routines
-from randomize import *
+from zen.randomize import *
 
 # import generation routines
-from . import generating
+from zen import generating
 
 # import built-in data
-from . import data
+from zen import data
 
 # import utilities
-from .exceptions import *
-from .constants import *
+from zen.exceptions import *
+from zen.constants import *
 
 # import io routines
-from .io import *
+from zen.io import *
 
 # import algorithms
-from .algorithms import *
+from zen.algorithms import *
 
 # import control functionality
-from . import control
+from zen import control
 
 # import visual stuff
-from . import layout
-from .drawing import *
-from .view import *
+from zen import layout
+from zen.drawing import *
+from zen.view import *
 
 # import interoperability
-from .nx import *
+from zen.nx import *

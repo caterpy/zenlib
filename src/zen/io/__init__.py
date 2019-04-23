@@ -46,10 +46,10 @@ specific, several are common enough to warrent being standardized across storage
 		
 """
 
-import edgelist
-import hedgelist
-import rdot
-import scn
+from . import edgelist
+from . import hedgelist
+from . import rdot
+from . import scn
 from . import bel
-import memlist
+from . import memlist
 from . import gml

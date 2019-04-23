@@ -74,7 +74,7 @@ from zen.exceptions import *
 from zen.graph import Graph
 from zen.digraph import DiGraph
 
-from zen.util.bitvector import BitVector
+from BitVector import BitVector
 import math
 import array
 import types

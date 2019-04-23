@@ -31,6 +31,6 @@ Random graph models
 
 """
 
-from rgm import *
+from .rgm import *
 from .duplication import *
 from .local import *

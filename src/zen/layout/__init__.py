@@ -30,10 +30,10 @@ Layout functions
 
 """
 
-import spring_layout
-import random_layout
-import forceatlas_layout
-import fruchtermanreingold_layout
+from . import spring_layout
+from . import random_layout
+from . import forceatlas_layout
+from . import fruchtermanreingold_layout
 
 BBOX_NAME = 'bbox'
 BBOX_DEFAULT_VALUE = (0., 0., 100., 100.)

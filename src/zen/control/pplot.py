@@ -15,7 +15,7 @@ profile plots and heatmaps.
 import math
 import matplotlib
 import matplotlib.pyplot as pyplot
-from types import TupleType, ListType
+from typing import Tuple as TupleType, List as ListType
 from zen import DiGraph
 from zen.control import profile as control_profile
 
