@@ -4,7 +4,7 @@
 
 
 def keys_of_max_value(dct):
-    it = iter(list(dct.items()))
+    it = iter(dct.items())
     try:
         key, val = next(it)
     except:

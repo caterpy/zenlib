@@ -88,7 +88,8 @@ class Benchmark:
 
     def __load_benchmarks(self):
         methods = dict(inspect.getmembers(self, inspect.ismethod))
-        bm_names = [x[3:] for x in [x for x in list(methods.keys()) if x.startswith('bm_')]]
+        bm_names = map(lambda x: x[3:], filter(
+            lambda x: x.startswith('bm_'), methods.keys()))
         self.max_name_len = max([len(x) for x in bm_names])
 
         for n in bm_names:
@@ -113,7 +114,7 @@ class Benchmark:
         self.setup()
 
         print ('\n{}:'.format(self.name))
-        for name, fxns in list(self.tests.items()):
+        for name, fxns in self.tests.items():
             run_times = []
             print ('\tTest: {}'.format(name.ljust(self.max_name_len+2, ' ')), end='')
             setup_fxn, test_fxn, teardown_fxn = fxns
@@ -143,11 +144,11 @@ class Benchmark:
 
         if order is None:
             # by default order from fastest to slowest
-            order = list(self.times.items())
+            order = self.times.items()
             order.sort(cmp=lambda x, y: cmp(x[1], y[1]))
-            order = [x[0] for x in order]
+            order = map(lambda x: x[0], order)
 
-        names = [x.replace('_', ' ') for x in order]
+        names = map(lambda x: x.replace('_', ' '), order)
 
         data = [self.times[k] for k in order]
 
@@ -156,7 +157,7 @@ class Benchmark:
             data = [(max_val/x) for x in data]
 
         width = 0.8
-        pylab.bar(list(range(len(data))), data, width=0.8)
+        pylab.bar(range(len(data)), data, width=0.8)
         pylab.title(self.name, fontsize=20, fontweight='bold')
 
         if raw:

@@ -484,7 +484,7 @@ def main():
     G.E.add(1, 2)
     G.E.add(2, 3)
     G.E.add(3, 4)
-    idx_lookup = dict([(n, i) for n, i in zip(G.V, list(range(len(G.V))))])
+    idx_lookup = dict([(n, i) for n, i in zip(G.V, range(len(G.V)))])
     #bv = store_bitvector(G, len(idx_lookup)-1, lambda x: idx_lookup[x])
     s = store_str(G, strict_order=True)
     G2 = read_str(s)
