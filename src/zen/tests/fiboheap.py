@@ -62,7 +62,7 @@ class TestZenFibonacciHeap(unittest.TestCase):
 
         for d in range(10000):
             n = random.randint(1, 100000)
-            if maxNode == None or n > maxNode:
+            if maxNode is None or n > maxKey:
                 maxKey = n
                 maxNode = H.insert(n, n)
                 nodes.append(n)

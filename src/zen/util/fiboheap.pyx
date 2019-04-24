@@ -7,6 +7,7 @@ DEF INTMIN = -2147483648
 cdef inline object convert_fibheap_el_to_pycapsule(cfiboheap.fibheap_el* element):
 	return PyCapsule_New(element, NULL, NULL)
 	
+
 cdef inline cfiboheap.fibheap_el* convert_pycapsule_to_fibheap_el(object element):
 	return <cfiboheap.fibheap_el*>PyCapsule_GetPointer(element, NULL) 
 
@@ -49,7 +50,7 @@ cdef class FiboHeap:
 		if retValue is NULL:
 			raise MemoryError()
 		
-		return convert_fibheap_el_to_pycapsule(retValue) 
+		return convert_fibheap_el_to_pycapsule(retValue)
 
 	cdef void* _insert(FiboHeap self, double key, void* data=NULL):
 		"""

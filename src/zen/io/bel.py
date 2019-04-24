@@ -487,7 +487,7 @@ def main():
     #bv = store_bitvector(G, len(idx_lookup)-1, lambda x: idx_lookup[x])
     s = store_str(G, strict_order=True)
     G2 = read_str(s)
-    print ("{} {}\n".format(len(G2.V), len(G2.E), G2.topology()))
+    print ("{} {}".format(len(G2.V), len(G2.E), G2.topology()))
 
 
 if __name__ == '__main__':
