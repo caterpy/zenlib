@@ -54,16 +54,16 @@ class UndirectedSCNTestCase(unittest.TestCase):
         self.assertEqual(G.node_data('a')[1], '1')
 
         # write all attributes back
-        scn.write(	G, fname, num_node_props=2, num_edge_props=2,
-                   node_data_fxn=lambda idx, nobj, data: None if data == None else tuple([
-                                                                                         a for a in data]),
+        scn.write(G, fname, num_node_props=2, num_edge_props=2,
+                   node_data_fxn=lambda idx, nobj,
+                   data: None if data is None else tuple([a for a in data]),
                    edge_data_fxn=lambda idx, n1, n2, data: tuple([a for a in data]))
         G = scn.read(fname, directed=False)
 
         self.assertEqual(len(G), 5)
         self.assertEqual(G.size(), 5)
 
-        self.assertNotEqual(G.node_data('a'), None)
+        self.assertIsNotNone(G.node_data('a'))
         self.assertEqual(G.node_data('a')[0], '1')
         self.assertEqual(G.edge_data('a', 'b')[0], 'X')
 
@@ -71,7 +71,7 @@ class UndirectedSCNTestCase(unittest.TestCase):
         G = scn.read(path.join(path.dirname(__file__),
                                'test1.scn'), directed=False)
         scn.write(	G, fname, num_node_props=2, num_edge_props=2,
-                   node_data_fxn=lambda idx, nobj, data: None if data == None else tuple([
+                   node_data_fxn=lambda idx, nobj, data: None if data is None else tuple([
                                                                                          a for a in data]),
                    edge_data_fxn=lambda idx, n1, n2, data: None)
         G = scn.read(fname, directed=False)
@@ -81,7 +81,7 @@ class UndirectedSCNTestCase(unittest.TestCase):
 
         self.assertIsNotNone(G.node_data('a'))
         self.assertEqual(G.node_data('a')[0], '1')
-        self.assertEqual(G.edge_data('a', 'b'), None)
+        self.assertIsNotNone(G.edge_data('a', 'b'))
 
         os.remove(fname)
 
@@ -136,16 +136,16 @@ class SCNTestCase(unittest.TestCase):
         self.assertEqual(G.node_data('a')[1], '1')
 
         # write all attributes back
-        scn.write(	G, fname, num_node_props=2, num_edge_props=2,
-                   node_data_fxn=lambda idx, nobj, data: None if data == None else tuple([
-                                                                                         a for a in data]),
-                   edge_data_fxn=lambda idx, n1, n2, data: tuple([a for a in data]))
+        scn.write(G, fname, num_node_props=2, num_edge_props=2,
+                node_data_fxn=lambda idx, nobj,
+                data: None if data is None else tuple([a for a in data]),
+                edge_data_fxn=lambda idx, n1, n2, data: tuple([a for a in data]))
         G = scn.read(fname, directed=True)
 
         self.assertEqual(len(G), 5)
         self.assertEqual(G.size(), 5)
 
-        self.assertNotEqual(G.node_data('a'), None)
+        self.assertIsNotNone(G.node_data('a'))
         self.assertEqual(G.node_data('a')[0], '1')
         self.assertEqual(G.edge_data('a', 'b')[0], 'X')
 
@@ -153,7 +153,7 @@ class SCNTestCase(unittest.TestCase):
         G = scn.read(path.join(path.dirname(__file__),
                                'test1.scn'), directed=True)
         scn.write(	G, fname, num_node_props=2, num_edge_props=2,
-                   node_data_fxn=lambda idx, nobj, data: None if data == None else tuple([
+                   node_data_fxn=lambda idx, nobj, data: None if data is None else tuple([
                                                                                          a for a in data]),
                    edge_data_fxn=lambda idx, n1, n2, data: None)
         G = scn.read(fname, directed=True)
@@ -161,9 +161,9 @@ class SCNTestCase(unittest.TestCase):
         self.assertEqual(len(G), 5)
         self.assertEqual(G.size(), 5)
 
-        self.assertNotEqual(G.node_data('a'), None)
+        self.assertIsNotNone(G.node_data('a'))
         self.assertEqual(G.node_data('a')[0], '1')
-        self.assertEqual(G.edge_data('a', 'b'), None)
+        self.assertIsNone(G.edge_data('a', 'b'))
 
         os.remove(fname)
 
@@ -183,7 +183,7 @@ class SCNTestCase(unittest.TestCase):
         G.add_edge('d', 'a', '10')
 
         def node_data_fnc(
-            idx, nobj, data): return None if data == None else [data]
+            idx, nobj, data): return None if data is None else [data]
 
         def edge_data_fnc(idx, n1, n2, data): return [data]
 
