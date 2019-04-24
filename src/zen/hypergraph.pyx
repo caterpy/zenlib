@@ -384,7 +384,7 @@ cdef class HyperGraph:
 		as an edge idx.  Otherwise, it's taken to be a node list that identifies
 		the edge.
 		"""
-		if type(nlist) == types.IntType:
+		if type(nlist) == int:
 			return self.edge_info[nlist].num_nodes
 		else:
 			return self.edge_info[self.edge_idx_(nlist)].num_nodes
@@ -729,6 +729,7 @@ cdef class NodeIterator:
 		self.node_count = 0
 		self.nobj = nobj
 
+	next = __next__
 	def __next__(NodeIterator self):
 		if self.node_count >= self.graph.num_nodes:
 			raise StopIteration()
@@ -779,6 +780,7 @@ cdef class AllEdgeIterator:
 		self.idx = 0
 		self.objs = objs
 
+	next = __next__
 	def __next__(AllEdgeIterator self):
 		cdef int idx = self.idx
 		cdef int i
@@ -825,6 +827,7 @@ cdef class NodeEdgeIterator:
 		self.idx = 0
 		self.endpoints = endpoints
 
+	next = __next__
 	def __next__(NodeEdgeIterator self):
 		cdef int idx = self.idx
 		cdef int* elist
@@ -885,6 +888,7 @@ cdef class SomeEdgeIterator:
 		else:
 			self.edge_iter = None
 
+	next = __next__
 	def __next__(SomeEdgeIterator self):
 		cdef int i
 		while True:
@@ -944,6 +948,7 @@ cdef class NeighborIterator:
 		self.eidx = -1
 		self.nlist_idx = 0
 
+	next = __next__
 	def __next__(NeighborIterator self):
 		cdef int eid
 		cdef int nlidx
@@ -1013,6 +1018,7 @@ cdef class SomeNeighborIterator:
 		else:
 			self.neighbor_iter = None
 
+	next = __next__
 	def __next__(SomeNeighborIterator self):
 		while True:
 			if self.neighbor_iter is None:

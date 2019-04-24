@@ -131,8 +131,7 @@ def read_str(sbuffer, **kwargs):
     # convert the string into a bitvector
     bv = BitVector(size=len(sbuffer) * 8)
     offset = 0
-    for c in sbuffer:
-        v = ord(c)
+    for v in sbuffer:
         dec2bv(v, bv, offset, 8)
         offset += 8
 
@@ -373,7 +372,7 @@ def write_str(G):
 
     # walk through the bitvector 8 bit chunks, convert each to a character
     num_chars = int(math.ceil(float(len(bv)) / 8.))
-    result = array.array('c', ['0'] * num_chars)
+    result = array.array('u', ['0'] * num_chars)
 
     for i in range(num_chars):
         start = i * 8
@@ -393,7 +392,7 @@ def write_str(G):
 
         result[i] = chr(n)
 
-    return result.tostring()
+    return result.tobytes()
 
 
 def write(G, fh):
@@ -453,7 +452,7 @@ def dec2bin(i, max_len):
     if num_bits > max_len:
         raise Exception('Too many bits being stored.')
 
-    A = array.array('c', ['0'] * max_len)
+    A = array.array('u', ['0'] * max_len)
     pos = max_len - 1
     while i > 0:
         if i % 2 == 1:

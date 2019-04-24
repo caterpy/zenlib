@@ -13,7 +13,7 @@ class UndirectedSCNTestCase(unittest.TestCase):
         self.assertEqual(len(G), 5)
         self.assertEqual(G.size(), 5)
 
-        self.assertNotEqual(G.node_data_(0), None)
+        self.assertIsNotNone(G.node_data_(0), None)
         self.assertEqual(G.node_data_(0)[0], '1')
 
     def test_test2(self):
@@ -79,7 +79,7 @@ class UndirectedSCNTestCase(unittest.TestCase):
         self.assertEqual(len(G), 5)
         self.assertEqual(G.size(), 5)
 
-        self.assertNotEqual(G.node_data('a'), None)
+        self.assertIsNotNone(G.node_data('a'))
         self.assertEqual(G.node_data('a')[0], '1')
         self.assertEqual(G.edge_data('a', 'b'), None)
 
@@ -95,7 +95,7 @@ class SCNTestCase(unittest.TestCase):
         self.assertEqual(len(G), 5)
         self.assertEqual(G.size(), 5)
 
-        self.assertNotEqual(G.node_data_(0), None)
+        self.assertIsNotNone(G.node_data_(0))
         self.assertEqual(G.node_data_(0)[0], '1')
 
     def test_test2(self):

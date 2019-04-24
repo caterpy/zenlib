@@ -120,7 +120,7 @@ def read(filename,**kwargs):
 	
 	return __inner_read(filename,directed,node_obj_fxn,ignore_duplicate_edges,merge_graph,weighted)
 	
-cpdef __inner_read(char* filename,directed,node_obj_fxn,bool ignore_duplicate_edges,G,weighted):	
+cpdef __inner_read(filename,directed,node_obj_fxn,bool ignore_duplicate_edges,G,weighted):	
 	if G is not None and directed is not None:
 		raise Exception, 'A graph and the directed argument cannot both be specified'
 		
@@ -136,12 +136,12 @@ cpdef __inner_read(char* filename,directed,node_obj_fxn,bool ignore_duplicate_ed
 	cdef int MAX_LINE_LEN = 100
 	
 	# make the string buffer
-	str_buffer = '0'*MAX_LINE_LEN
+	str_buffer = ('0'*MAX_LINE_LEN).encode('utf-8')
 	
 	cdef char* buffer = str_buffer
 
 	# open the file
-	fh = fopen(filename,'r')
+	fh = fopen(filename.encode('utf-8'),'r')
 	
 	if fh == NULL:
 		raise Exception, 'Unable to open file %s' % filename

@@ -427,8 +427,8 @@ class UVEdgeIterator:
 	def __init__(self,G,iterator):
 		self.G = G
 		self.iterator = iterator
-		
-	def next(self):
+
+	def __next__(self):
 		result = next(self.iterator)
 		
 		x,y = result[0:2]
@@ -436,6 +436,7 @@ class UVEdgeIterator:
 			result = tuple(y,x,*result[2:])
 			
 		return result
+	next = __next__
 		
 	def __iter__(self):
 		return self

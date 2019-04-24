@@ -288,7 +288,7 @@ def read(filename,**kwargs):
 	else:
 		return parse_undirected_scn(filename,max_line_len,node_obj_fxn,ignore_duplicate_edges,merge_graph)
 			
-cdef parse_directed_scn(char* filename,int max_line_len,node_obj_fxn,bool ignore_duplicate_edges,merge_graph):
+cdef parse_directed_scn(filename,int max_line_len,node_obj_fxn,bool ignore_duplicate_edges,merge_graph):
 	
 	cdef DiGraph G = None
 	
@@ -302,14 +302,14 @@ cdef parse_directed_scn(char* filename,int max_line_len,node_obj_fxn,bool ignore
 	# open the file
 	cdef FILE* fh
 	
-	fh = fopen(filename,'r')
+	fh = fopen(filename.encode('UTF-8'),'r')
 
 	if fh == NULL:
 		raise ZenException, 'Unable to open file %s' % filename
 		
 	# make the string buffer
-	last_str_buffer = '0'*max_line_len
-	str_buffer = '0'*max_line_len
+	last_str_buffer = ('0'*max_line_len).encode('utf-8')
+	str_buffer = ('0'*max_line_len).encode('utf-8')
 	
 	cdef char* buffer = str_buffer
 	
@@ -430,7 +430,7 @@ cdef parse_directed_scn(char* filename,int max_line_len,node_obj_fxn,bool ignore
 	
 	return G
 
-cdef parse_undirected_scn(char* filename,int max_line_len,node_obj_fxn,bool ignore_duplicate_edges,merge_graph):
+cdef parse_undirected_scn(filename,int max_line_len,node_obj_fxn,bool ignore_duplicate_edges,merge_graph):
 
 	cdef Graph G = None
 
@@ -444,14 +444,14 @@ cdef parse_undirected_scn(char* filename,int max_line_len,node_obj_fxn,bool igno
 	# open the file
 	cdef FILE* fh
 
-	fh = fopen(filename,'r')
+	fh = fopen(filename.encode('UTF-8'),'r')
 
 	if fh == NULL:
 		raise ZenException, 'Unable to open file %s' % filename
 
 	# make the string buffer
-	last_str_buffer = '0'*max_line_len
-	str_buffer = '0'*max_line_len
+	last_str_buffer = ('0'*max_line_len).encode('utf-8')
+	str_buffer = ('0'*max_line_len).encode('utf-8')
 
 	cdef char* buffer = str_buffer
 

@@ -1,4 +1,4 @@
-import overlapping_communityset as ocs
+from . import overlapping_communityset as ocs
 
 import numpy as np
 

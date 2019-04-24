@@ -4,7 +4,8 @@
 #  # This should not be the case though
 #  from distutils.core import setup
 from distutils.core import setup
-from distutils.extension import Extension
+#from distutils.extension import Extension
+from setuptools import Extension
 from Cython.Distutils import build_ext
 import os.path
 import sys
@@ -84,6 +85,7 @@ setup(
     version='0.9',
     cmdclass={'build_ext': build_ext},
     ext_modules=ext_modules,
+    language_level=3,
     packages=['zen', 'zen.data', 'zen.drawing', 'zen.generating', 'zen.io', 'zen.layout',
               'zen.tests', 'zen.util', 'zen.algorithms.community', 'zen.benchmarks',
               'zen.algorithms', 'zen.algorithms.flow', 'zen.control'],

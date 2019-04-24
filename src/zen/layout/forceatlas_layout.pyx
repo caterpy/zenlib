@@ -38,7 +38,7 @@ def run_forces(view):
 	#get position array:
 	graph = view.graph()
 	pos_array = view.pos_array()
-	if pos_array == None:
+	if pos_array is None:
 		pos_array = rand_pos_array(view)
 		view.set_pos_array(pos_array)
 	

@@ -24,10 +24,12 @@ class RealNetworksLPATestCase(unittest.TestCase):
         nodes = set(G.nodes())
 
         print ('NET: {}'.format(
-            sorted(G.nodes(), cmp=lambda x, y: cmp(int(x), int(y)))))
+            sorted(G.nodes(), key=int)))
+        # cmp=lambda x, y: cmp(int(x), int(y)))))
 
         for c in comms:
-            print (sorted(c.nodes(), cmp=lambda x, y: cmp(int(x), int(y))))
+            print (sorted(c.nodes(), key=int))
+            # cmp=lambda x, y: cmp(int(x), int(y))))
             print (sorted(c.nodes_()))
             for n in c:
                 if n not in nodes:

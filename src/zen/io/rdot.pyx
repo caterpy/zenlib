@@ -74,12 +74,12 @@ cpdef __inner_read(filename,node_obj_fxn,merge_graph):
 	cdef FILE* fh
 	
 	# make the string buffer
-	str_buffer = '0'*MAX_LINE_LEN
+	str_buffer = ('0'*MAX_LINE_LEN).encode('utf-8')
 
 	cdef char* buffer = str_buffer
 
 	# open the file
-	fh = fopen(filename,'r')
+	fh = fopen(filename.encode('utf-8'),'r')
 
 	if fh == NULL:
 		raise ZenException, 'Unable to open file %s' % filename
@@ -123,7 +123,7 @@ cdef parse_directed_rdot(FILE* fh,node_obj_fxn,merge_graph):
 		raise ZenException, 'merge_graph must be a DiGraph to incorporate directed rdot information'	
 
 	# make the string buffer
-	str_buffer = '0'*MAX_LINE_LEN
+	str_buffer = ('0'*MAX_LINE_LEN).encode('utf-8')
 
 	cdef char* buffer = str_buffer
 

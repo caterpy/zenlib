@@ -78,7 +78,7 @@ cpdef __inner_write(G,filename):
 		
 	fh.close()
 	
-def read(char* filename,**kwargs):
+def read(filename,**kwargs):
 	"""
 	Read in a network from the file named ``filename`` assuming a memory-mapped edgelist format.
 	
@@ -105,7 +105,7 @@ def read(char* filename,**kwargs):
 	
 	return __inner_read(filename,directed,ignore_duplicate_edges,weighted,node_obj_fxn)
 	
-cpdef __inner_read(char* filename,bint directed,bint ignore_duplicates,bint weighted,node_obj_fxn):
+cpdef __inner_read(filename,bint directed,bint ignore_duplicates,bint weighted,node_obj_fxn):
 	
 	cdef Graph uG = None
 	cdef DiGraph dG = None
@@ -119,13 +119,13 @@ cpdef __inner_read(char* filename,bint directed,bint ignore_duplicates,bint weig
 	cdef int MAX_LINE_LEN = 100
 	
 	# make the string buffer
-	str_buffer = '0'*MAX_LINE_LEN
+	str_buffer = ('0'*MAX_LINE_LEN).encode('utf-8')
 	
 	cdef char* buffer = str_buffer
 	cdef char* result
 
 	# open the file
-	fh = fopen(filename,'r')
+	fh = fopen(filename.encode('utf-8'),'r')
 	
 	if fh == NULL:
 		raise Exception, 'Unable to open file %s' % filename
@@ -159,7 +159,7 @@ cpdef __inner_read(char* filename,bint directed,bint ignore_duplicates,bint weig
 			raise ZenException, 'Line %d exceeded maximum line length (%d)' % (line_no,MAX_LINE_LEN)
 			
 		# get the number of nodes
-		num_nodes = int(str(buffer).strip())
+		num_nodes = int(buffer)
 		
 	if num_nodes == -1:
 		raise ZenException, 'The number of nodes was not specified'

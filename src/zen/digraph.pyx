@@ -3315,6 +3315,7 @@ cdef class NodeIterator:
 		self.nobj = nobj
 		self.obj = obj
 
+	next = __next__
 	def __next__(NodeIterator self):
 		if self.init_num_changes != self.graph.num_changes:
 			raise GraphChangedException()
@@ -3381,6 +3382,7 @@ cdef class AllEdgeIterator:
 		self.idx = 0
 		self.endpoints = endpoints
 
+	next = __next__
 	def __next__(AllEdgeIterator self):
 		if self.init_num_changes != self.graph.num_changes:
 			raise GraphChangedException()
@@ -3485,6 +3487,7 @@ cdef class NodeEdgeIterator:
 		elif self.which_degree == ITER_OUTDEGREE and self.graph.node_info[nidx].outdegree > 0:
 			self.deg = 2
 
+	next = __next__
 	def __next__(NodeEdgeIterator self):
 		if self.init_num_changes != self.graph.num_changes:
 			raise GraphChangedException()
@@ -3648,11 +3651,12 @@ cdef class SomeEdgeIterator:
 
 		# setup the first iterator
 		if len(nbunch) > 0:
-			curr_nidx = self.nbunch_iter.next()
+			curr_nidx = next(self.nbunch_iter)
 			self.edge_iter = NodeEdgeIterator(self.graph,curr_nidx,self.which_degree,self.weight,self.data)
 		else:
 			self.edge_iter = None
 
+	next = __next__
 	def __next__(SomeEdgeIterator self):
 		if self.init_num_changes != self.graph.num_changes:
 			raise GraphChangedException()
@@ -3707,7 +3711,7 @@ cdef class SomeEdgeIterator:
 							return self.graph.node_obj_lookup[self.graph.edge_info[result].src], self.graph.node_obj_lookup[self.graph.edge_info[result].tgt]
 				except StopIteration:
 					self.edge_iter = None
-					curr_nidx = self.nbunch_iter.next()
+					curr_nidx = next(self.nbunch_iter)
 					self.edge_iter = NodeEdgeIterator(self.graph,curr_nidx,self.which_degree,self.weight,self.data)
 
 	def __iter__(SomeEdgeIterator self):
@@ -3735,6 +3739,7 @@ cdef class NeighborIterator:
 		self.use_nobjs = use_nobjs
 		self.obj = obj
 
+	next = __next__
 	def __next__(NeighborIterator self):
 		if self.init_num_changes != self.G.num_changes:
 			raise GraphChangedException()
@@ -3864,11 +3869,12 @@ cdef class SomeNeighborIterator:
 
 		# setup the first iterator
 		if len(nbunch) > 0:
-			curr_nidx = self.nbunch_iter.next()
+			curr_nidx = next(self.nbunch_iter)
 			self.neighbor_iter = NeighborIterator(self.graph,curr_nidx,self.which_degree,self.obj,self.data,self.use_nobjs)
 		else:
 			self.neighbor_iter = None
 
+	next = __next__
 	def __next__(SomeNeighborIterator self):
 		if self.init_num_changes != self.graph.num_changes:
 			raise GraphChangedException()
@@ -3891,7 +3897,7 @@ cdef class SomeNeighborIterator:
 					return result
 				except StopIteration:
 					self.neighbor_iter = None
-					curr_nidx = self.nbunch_iter.next()
+					curr_nidx = next(self.nbunch_iter)
 					self.neighbor_iter = NeighborIterator(self.graph,curr_nidx,self.which_degree,self.obj,self.data,self.use_nobjs)
 
 	def __iter__(SomeNeighborIterator self):
