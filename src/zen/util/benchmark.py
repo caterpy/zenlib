@@ -144,7 +144,8 @@ class Benchmark:
         if order is None:
             # by default order from fastest to slowest
             order = list(self.times.items())
-            order.sort(cmp=lambda x, y: cmp(x[1], y[1]))
+            order.sort(key=lambda x: x[1])
+            #cmp=lambda x, y: cmp(x[1], y[1]))
             order = [x[0] for x in order]
 
         names = [x.replace('_', ' ') for x in order]
