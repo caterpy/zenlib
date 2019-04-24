@@ -27,7 +27,7 @@ class NonRandomGraphBenchmark(Benchmark):
         fh = open(self.fname, 'w')
         for i in range(self.NUM_NODES):
             for j in range(i+1, self.NUM_NODES):
-                print >>fh, 'N%d N%d' % (i, j)
+                print ('N%d N%d' % (i, j), file=fh)
 
         fh.close()
 
