@@ -127,10 +127,10 @@ cpdef write_graph_scn(G,filename,num_node_props,num_edge_props,node_data_fxn,edg
 	else: # write out the nodes
 		if use_node_indices:
 			for n_ in G.nodes_iter_():
-				fh.write(str(n_) + '\n')
+				fh.write('{}\n'.format(n_))
 		else:
 			for n in G.nodes_iter():
-				fh.write(str(n) + '\n')
+				fh.write('{}\n'.format(n))
 
 	# write edges
 	fh.write('=\n')
@@ -151,16 +151,17 @@ cpdef write_graph_scn(G,filename,num_node_props,num_edge_props,node_data_fxn,edg
 				D = edge_data_fxn(eidx,n1,n2,data)
 				
 				if use_node_indices:
-					n1 = str(n1idx)
-					n2 = str(n2idx)
+					n1 = n1idx
+					n2 = n2idx
 				else:
-					n1 = str(n1)
-					n2 = str(n2)
+					n1 = n1
+					n2 = n2
 					
 				if D != None:
-					fh.write(n1 + ' ' + n2 + ' ' + ' '.join(D) + '\n')
+					fh.write('{} {} {}\n'.format(
+                                            n1, n2, ' '.join(D)))
 				else:
-					fh.write(n1 + ' ' + n2 + '\n')
+					fh.write('{} {}'.format(n1, n2))
 	else:
 		for nidx in G.nodes_iter_():
 			for eidx in G.edges_iter_(nidx):
@@ -345,7 +346,7 @@ cdef parse_directed_scn(filename,int max_line_len,node_obj_fxn,bool ignore_dupli
 	while not feof(fh):
 		line_no += 1
 		
-		fgets(buffer,max_line_len,fh)		
+		fgets(buffer,max_line_len,fh)
 		buf_len = len(buffer)
 
 		if buffer[0] == '#':
@@ -377,9 +378,9 @@ cdef parse_directed_scn(filename,int max_line_len,node_obj_fxn,bool ignore_dupli
 	
 		if reading_nodes:
 			if node_obj_fxn is None:
-				name = buffer[start1:end1]
+				name = buffer[start1:end1].decode('utf-8')
 			else:
-				name = node_obj_fxn(buffer[start1:end1])
+				name = node_obj_fxn(buffer[start1:end1].decode('utf-8'))
 			props = None
 			if num_node_props > 0:
 				props = process_properties(buffer,buf_len,end1+1,line_no,num_node_props)
@@ -397,11 +398,11 @@ cdef parse_directed_scn(filename,int max_line_len,node_obj_fxn,bool ignore_dupli
 				end2 += 1
 			
 			if node_obj_fxn is None:
-				name1 = buffer[start1:end1]
-				name2 = buffer[start2:end2]
+				name1 = buffer[start1:end1].decode('utf-8')
+				name2 = buffer[start2:end2].decode('utf-8')
 			else:
-				name1 = node_obj_fxn(buffer[start1:end1])
-				name2 = node_obj_fxn(buffer[start2:end2])
+				name1 = node_obj_fxn(buffer[start1:end1].decode('utf-8'))
+				name2 = node_obj_fxn(buffer[start2:end2].decode('utf-8'))
 				
 			props = None
 			if num_edge_props > 0 and (end2+1 < buf_len and not isspace(<int>buffer[end2+1])):

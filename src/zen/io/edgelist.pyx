@@ -76,10 +76,10 @@ cpdef __inner_write(G,filename,bool use_weights,bool use_node_indices):
 	else:
 		if not use_weights:
 			for x,y in G.edges_iter():
-				fh.write('%s %s\n' % (str(x),str(y)))
+				fh.write('%s %s\n' % (x,y))
 		else:
 			for x,y,w in G.edges_iter(weight=True):
-				fh.write('%s %s %f\n' % (str(x),str(y),w))
+				fh.write('%s %s %f\n' % (x,y,w))
 		
 	fh.close()
 
@@ -214,8 +214,8 @@ cpdef __inner_read(filename,directed,node_obj_fxn,bool ignore_duplicate_edges,G,
 		if start1 >= end1 or start2 >= end2 or (weighted and start3 >= end3):
 			raise Exception, 'Line %d was incorrectly formatted: %s' % (line_no,buffer)
 			
-		n1 = node_obj_fxn(buffer[start1:end1])
-		n2 = node_obj_fxn(buffer[start2:end2])
+		n1 = node_obj_fxn(buffer[start1:end1].decode('utf-8'))
+		n2 = node_obj_fxn(buffer[start2:end2].decode('utf-8'))
 		
 		if not ignore_duplicate_edges:
 			G.add_edge(n1,n2,weight=w) if weighted else G.add_edge(n1,n2)

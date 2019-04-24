@@ -177,7 +177,7 @@ cdef parse_directed_rdot(FILE* fh,node_obj_fxn,merge_graph):
 			if not buffer[start2] == '[' and not buffer[start2] == ';':
 				reading_nodes = False
 			else:
-				name = buffer[start1:end1]
+				name = buffer[start1:end1].decode('utf-8')
 				props = None
 				if buffer[start2] == '[':
 					props = process_properties(buffer,buf_len,start2,line_no)
@@ -203,8 +203,8 @@ cdef parse_directed_rdot(FILE* fh,node_obj_fxn,merge_graph):
 			if end2 == buf_len:
 				raise Exception, 'Edge expected on line %d: %s' % (line_no,buffer)
 			
-			name1 = node_obj_fxn(buffer[start1:end1])
-			name2 = node_obj_fxn(buffer[start2:end2])
+			name1 = node_obj_fxn(buffer[start1:end1].decode('utf-8'))
+			name2 = node_obj_fxn(buffer[start2:end2].decode('utf-8'))
 			props = None
 			
 			# find the properties start

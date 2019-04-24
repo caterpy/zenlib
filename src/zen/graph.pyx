@@ -1035,25 +1035,25 @@ cdef class Graph:
         """
         if node_idx >= self.node_capacity or not self.node_info[node_idx].exists:
             raise ZenException, 'Invalid node idx %d' % node_idx
-            
+
         if new_node_obj == self.node_object(node_idx):
             return
-        
+
         if new_node_obj in self.node_idx_lookup:
             raise ZenException, 'Node object %s is not unique' % str(new_node_obj)
-            
+
         if node_idx in self.node_obj_lookup:
             del self.node_idx_lookup[self.node_obj_lookup[node_idx]]
         self.node_idx_lookup[new_node_obj] = node_idx
         self.node_obj_lookup[node_idx] = new_node_obj
-    
+
     cpdef set_node_data(Graph self,nobj,data):
         """
         Associate a new data object with a specific node in the network.
         If data is None, then any data associated with the node is deleted.
-        
+
         **Args**:
-        
+
             * ``nobj``: the node object identifying the node whose data association is being changed.
             * ``data``: the data object to associate.  If ``None``, then any data object currently
                 associated with this node will be deleted.
@@ -1064,22 +1064,22 @@ cdef class Graph:
         """
         Associate a new data object with a specific node in the network.
         If data is None, then any data associated with the node is deleted.
-    
+
         **Args**:
-    
+
             * ``nidx``: the index of the node whose data association is being changed.
             * ``data``: the data object to associate.  If ``None``, then any data object currently
                 associated with this node will be deleted.
         """
         if nidx >= self.node_capacity or not self.node_info[nidx].exists:
             raise ZenException, 'Invalid node idx %d' % nidx
-            
+
         if data == None:
             if nidx in self.node_data_lookup:
                 del self.node_data_lookup[nidx]
         else:
             self.node_data_lookup[nidx] = data
-                        
+
     cpdef node_data(Graph self,nobj):
         """
         Return the data object associated with node having object identifier ``nobj``.
@@ -1092,16 +1092,16 @@ cdef class Graph:
         """
         if nidx >= self.node_capacity or not self.node_info[nidx].exists:
             raise ZenException, 'Invalid node idx %d' % nidx
-            
+
         if nidx in self.node_data_lookup:
             return self.node_data_lookup[nidx]
         else:
             return None
-        
+
     cpdef nodes_iter(Graph self,data=False):
         """
         Return an iterator over all the nodes in the graph.  
-        
+
         By default, the iterator yields node objects.  If ``data`` is ``True``,
         then the iterator yields tuples ``(node_object,node_data)``.
         """
@@ -1110,22 +1110,22 @@ cdef class Graph:
     cpdef nodes_iter_(Graph self,obj=False,data=False):
         """
         Return an iterator over all the nodes in the graph.  
-    
-        By default, the iterator yields node indices.  If either ``obj`` or ``data`` are ``True``, then 
+
+        By default, the iterator yields node indices.  If either ``obj`` or ``data`` are ``True``, then
         tuples are yielded.  For example::
-        
+
             for nidx in G.node_iter_():
                 print 'Node index:',nidx
-                
+
             for nidx,obj in G.node_iter_(obj=True):
                 print 'Node index:',nidx,'Node object:',obj
-                
+
             for nidx,obj,data in G.node_iter_(True,True):
                 print nidx,obj,data
-        
+
         """
         return NodeIterator(self,obj,data,False)
-                
+
     cpdef nodes(Graph self,data=False):
         """
         Return a list of the node objects in the graph.
