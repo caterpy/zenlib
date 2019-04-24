@@ -81,7 +81,7 @@ class UndirectedSCNTestCase(unittest.TestCase):
 
         self.assertIsNotNone(G.node_data('a'))
         self.assertEqual(G.node_data('a')[0], '1')
-        self.assertIsNotNone(G.edge_data('a', 'b'))
+        self.assertIsNone(G.edge_data('a', 'b'))
 
         os.remove(fname)
 

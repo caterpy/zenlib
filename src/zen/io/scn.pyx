@@ -161,7 +161,7 @@ cpdef write_graph_scn(G,filename,num_node_props,num_edge_props,node_data_fxn,edg
 					fh.write('{} {} {}\n'.format(
                                             n1, n2, ' '.join(D)))
 				else:
-					fh.write('{} {}'.format(n1, n2))
+					fh.write('{} {}\n'.format(n1, n2))
 	else:
 		for nidx in G.nodes_iter_():
 			for eidx in G.edges_iter_(nidx):
@@ -340,8 +340,8 @@ cdef parse_directed_scn(filename,int max_line_len,node_obj_fxn,bool ignore_dupli
 			break
 	end2 = i
 	
-	cdef int num_node_props = int(buffer[start1:end1])
-	cdef int num_edge_props = int(buffer[start2:end2])
+	cdef int num_node_props = int(buffer[start1:end1].decode('utf-8'))
+	cdef int num_edge_props = int(buffer[start2:end2].decode('utf-8'))
 	
 	while not feof(fh):
 		line_no += 1
@@ -482,8 +482,8 @@ cdef parse_undirected_scn(filename,int max_line_len,node_obj_fxn,bool ignore_dup
 			break
 	end2 = i
 
-	cdef int num_node_props = int(buffer[start1:end1])
-	cdef int num_edge_props = int(buffer[start2:end2])
+	cdef int num_node_props = int(buffer[start1:end1].decode('utf-8'))
+	cdef int num_edge_props = int(buffer[start2:end2].decode('utf-8'))
 
 	while not feof(fh):
 		line_no += 1
