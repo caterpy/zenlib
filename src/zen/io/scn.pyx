@@ -520,9 +520,9 @@ cdef parse_undirected_scn(filename,int max_line_len,node_obj_fxn,bool ignore_dup
 
 		if reading_nodes:
 			if node_obj_fxn is None:
-				name = buffer[start1:end1]
+				name = buffer[start1:end1].decode('utf-8')
 			else:
-				name = node_obj_fxn(buffer[start1:end1])
+				name = node_obj_fxn(buffer[start1:end1].decode('utf-8'))
 			props = None
 			if num_node_props > 0:
 				props = process_properties(buffer,buf_len,end1+1,line_no,num_node_props)
@@ -540,11 +540,11 @@ cdef parse_undirected_scn(filename,int max_line_len,node_obj_fxn,bool ignore_dup
 				end2 += 1
 
 			if node_obj_fxn is None:
-				name1 = buffer[start1:end1]
-				name2 = buffer[start2:end2]
+				name1 = buffer[start1:end1].decode('utf-8')
+				name2 = buffer[start2:end2].decode('utf-8')
 			else:
-				name1 = node_obj_fxn(buffer[start1:end1])
-				name2 = node_obj_fxn(buffer[start2:end2])
+				name1 = node_obj_fxn(buffer[start1:end1].decode('utf-8'))
+				name2 = node_obj_fxn(buffer[start2:end2].decode('utf-8'))
 
 			props = None
 			if num_edge_props > 0 and (end2+1 < buf_len and not isspace(<int>buffer[end2+1])):
@@ -591,7 +591,7 @@ cdef process_properties(char* buffer, int buf_len, int i, int line_no, int num_p
 		if eprop == buf_len-1 and not isspace(<int>buffer[eprop]):
 			eprop += 1
 			
-		prop = buffer[sprop:eprop]
+		prop = buffer[sprop:eprop].decode('utf-8')
 		props[p] = prop
 		
 		# move past the space
