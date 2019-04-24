@@ -220,7 +220,7 @@ def read(fh, **kwargs):
         close_fh = True
         fh = open(fh, 'r')
 
-    data = fh.read()
+    data = fh.read().from_bytes()
     G = read_str(data, **kwargs)
 
     if close_fh:
@@ -487,7 +487,7 @@ def main():
     #bv = store_bitvector(G, len(idx_lookup)-1, lambda x: idx_lookup[x])
     s = store_str(G, strict_order=True)
     G2 = read_str(s)
-    print ("{} {}".format(len(G2.V), len(G2.E), G2.topology()))
+    print ("{} {}\n".format(len(G2.V), len(G2.E), G2.topology()))
 
 
 if __name__ == '__main__':
