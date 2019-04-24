@@ -372,7 +372,7 @@ def write_str(G):
 
     # walk through the bitvector 8 bit chunks, convert each to a character
     num_chars = int(math.ceil(float(len(bv)) / 8.))
-    result = array.array('u', ['0'] * num_chars)
+    result = array.array('B', [0x30] * num_chars)
 
     for i in range(num_chars):
         start = i * 8
@@ -390,7 +390,7 @@ def write_str(G):
         if end < true_end:
             n <<= (true_end - end)
 
-        result[i] = chr(n)
+        result[i] = n
 
     return result.tobytes()
 
